@@ -15,10 +15,10 @@ INSERT INTO permissions_for_roles(role_id, permission_id) VALUES
 (4,14),(4,18);
 
 INSERT INTO employee(firstname, lastname, email, pass, wage, role_id) VALUES 
-	("SuperAdmin", "dummy", "super.admin@myfitness", "parola", 4500, 1),
-	("Admin", 	   "dummy", "admin@myfitness", 		 "parola", 3500, 2),
-	("Casier",     "dummy", "cashier@myfitness", 	 "parola", 3000, 3),
-	("Antrenor",   "dummy", "trainer@myfitness", 	 "parola", 2500, 4);
+	("SuperAdmin", "Dummy", "super.admin@myfitness.com", "parola", 4500, 1),
+	("Admin", 	   "Dummy", "admin@myfitness.com", 		 "parola", 3500, 2),
+	("Casier",     "Dummy", "cashier@myfitness.com", 	 "parola", 3000, 3),
+	("Antrenor",   "Dummy", "trainer@myfitness.com", 	 "parola", 2500, 4);
 
 INSERT INTO jurnal_events(descr) VALUES
 	("Client nou."),  ("Client sters."),
@@ -28,3 +28,6 @@ INSERT INTO subscriptions(price, description) VALUES
 	(150, "Abonament basic lunar. Acces general in sala."),
 	(175, "Abonament permium lunar. Acces general in sala si la sauna."),
     (240, "Abonament all inclusive lunar. Acces la toate facilitatile salii, plus snack la inceputul antrenamentului."); 
+
+INSERT INTO clients(firstname, lastname, email, subscription_id) VALUES 
+	("Client", "Dummy", "client@myfitness.com", 1);
