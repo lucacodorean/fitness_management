@@ -53,7 +53,7 @@ create table if not exists employee(
     firstname		varchar(20)  NOT NULL,
     lastname		varchar(20)  NOT NULL,
     email			varchar(25)  NOT NULL,
-    pass 			binary(64) 	 NOT NULL,
+    pass 			varchar(64)  NOT NULL,
     wage			int			 NOT NULL,
     rating			float		 NOT NULL DEFAULT 0,
     employed_at		timestamp	 NOT NULL DEFAULT NOW(),
