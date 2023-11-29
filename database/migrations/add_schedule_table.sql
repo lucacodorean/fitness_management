@@ -1,7 +1,7 @@
 use fitness_management_database;
 
 CREATE TABLE IF NOT EXISTS schedule (
-    id              INT        NOT NULL UNIQUE AUTO_INCREMENT,
+    id              INT        NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
     client_id       INT        NOT NULL,
     trainer_id      INT        NOT NULL,
     time_start      TIMESTAMP  NOT NULL,
