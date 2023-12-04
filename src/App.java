@@ -5,9 +5,9 @@ public class App {
 
     private static boolean connectionTest() throws SQLException {
         try (Connection connection = DriverManager.getConnection(
-            Variables.CONNECTION_URL, 
-            Variables.CONNECTION_USER, 
-            Variables.CONNECTION_PASS
+            Variables.getConnectionURL(), 
+            Variables.getConnectionUSER(), 
+            Variables.getConnectionPASS()
         )) { return true;
         }
         catch (SQLException exception) {

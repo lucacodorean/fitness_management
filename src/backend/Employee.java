@@ -60,9 +60,9 @@ public class Employee {
 
     private static boolean login(String email, String password) throws SQLException {
         Connection connection = DriverManager.getConnection(
-            Variables.CONNECTION_URL, 
-            Variables.CONNECTION_USER, 
-            Variables.CONNECTION_PASS
+            Variables.getConnectionURL(), 
+            Variables.getConnectionUSER(), 
+            Variables.getConnectionPASS()
         );
 
         
@@ -89,9 +89,9 @@ public class Employee {
         String[] result = new String[8];
 
         Connection connection = DriverManager.getConnection(
-            Variables.CONNECTION_URL, 
-            Variables.CONNECTION_USER, 
-            Variables.CONNECTION_PASS
+            Variables.getConnectionURL(), 
+            Variables.getConnectionUSER(), 
+            Variables.getConnectionPASS()
         );
         
         PreparedStatement statement = connection.prepareStatement("select * from employee where email = ?");
