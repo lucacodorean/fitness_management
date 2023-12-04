@@ -11,10 +11,10 @@ create table if not exists clients(
 	id 				int 		 NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT,
     firstname		varchar(20)  NOT NULL,
     lastname		varchar(20)  NOT NULL,
-    email			varchar(25)  NOT NULL,
+    email			varchar(25)  NOT NULL UNIQUE,
 	has_active_sub	boolean 	 NOT NULL DEFAULT false,
-    subscription_id	int			 NOT NULL,
-    next_payment_at time,
+    subscription_id	int			 NOT NULL DEFAULT 0,
+    next_payment_at timestamp,
     
     CONSTRAINT c1 FOREIGN KEY(subscription_id) REFERENCES subscriptions(id)
 );
@@ -23,7 +23,7 @@ create table if not exists payments(
 	id				int			NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT,
     client_id		int			NOT NULL,
     subscription_id	int			NOT NULL,
-    payed_at		timestamp	NOT NULL,
+    payed_at		timestamp	NOT NULL DEFAULT NOW(),
     
     CONSTRAINT c2 FOREIGN KEY(subscription_id) REFERENCES subscriptions(id),
     CONSTRAINT c3 FOREIGN KEY(client_id)	   REFERENCES clients(id)
@@ -53,7 +53,7 @@ create table if not exists employee(
     firstname		varchar(20)  NOT NULL,
     lastname		varchar(20)  NOT NULL,
     email			varchar(25)  NOT NULL,
-    pass 			binary(64) 	 NOT NULL,
+    pass 			varchar(64)  NOT NULL,
     wage			int			 NOT NULL,
     rating			float		 NOT NULL DEFAULT 0,
     employed_at		timestamp	 NOT NULL DEFAULT NOW(),
