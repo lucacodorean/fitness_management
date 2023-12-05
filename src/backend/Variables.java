@@ -1,15 +1,33 @@
 package backend;
 
-public class Variables {
-    private Variables() { }
+import java.io.Closeable;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
-    private static final String CONNECTION_URL  = "jdbc:mysql://localhost:3306/fitness_management_database";
-    private static final String CONNECTION_USER = "root";
-    private static final String CONNECTION_PASS = "pass";
+public class Variables implements Closeable {
 
-    public static String getConnectionURL()  { return Variables.CONNECTION_URL;  }
-    public static String getConnectionUSER() { return Variables.CONNECTION_USER; }
-    public static String getConnectionPASS() { return Variables.CONNECTION_PASS; }
+  public String CONNECTION_URL = "";
+  public String CONNECTION_USER = "";
+  public String CONNECTION_PASS = "";
 
-    public static final String[] NULL_ARRAY = {};
+  public Variables() {
+    Properties prop = new Properties();
+    try (InputStream input = new FileInputStream("config.properties")) {
+      prop.load(input);
+
+      CONNECTION_URL = prop.getProperty("DB_URL");
+      CONNECTION_USER = prop.getProperty("DB_USERNAME");
+      CONNECTION_PASS = prop.getProperty("DB_PASSWORD");
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  @Override
+  public void close() throws IOException {
+    // TODO Auto-generated method stub
+    // throw new UnsupportedOperationException("Unimplemented method 'close'");
+  }
 }

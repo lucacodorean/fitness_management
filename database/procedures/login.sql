@@ -1,7 +1,7 @@
 use fitness_management_database;
 
 DELIMITER //
-CREATE PROCEDURE login(IN email_param VARCHAR, IN pass_param VARCHAR, OUT success BOOLEAN)
+CREATE PROCEDURE login(IN email_param VARCHAR(64), IN pass_param VARCHAR(25), OUT success BOOLEAN)
 BEGIN
     DECLARE email_exists BOOLEAN;
 	DECLARE password_ 	 VARCHAR(64);

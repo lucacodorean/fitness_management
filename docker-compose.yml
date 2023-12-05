@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  fitness:
+    image: mysql
+    volumes:
+      - '.:/var/www/html'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    ports:
+      - 3306:3306
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
