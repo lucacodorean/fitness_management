@@ -30,7 +30,6 @@ public class App {
       System.out.println(ex.toString());
     }
 
-    System.out.println("MIAU");
     new LoginPage();
   }
 }
