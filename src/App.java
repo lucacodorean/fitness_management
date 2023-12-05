@@ -1,4 +1,6 @@
 import backend.*;
+import backend.controllers.AboutController;
+import backend.controllers.HomeController;
 import frontend.*;
 import java.sql.*;
 
@@ -30,7 +32,13 @@ public class App {
       System.out.println(ex.toString());
     }
 
-    System.out.println("MIAU");
-    new LoginPage();
+    new Window();
+
+    Route[] routes = new Route[] {
+      new Route("home", HomeController::index),
+      new Route("about", AboutController::index),
+    };
+    Router router = new Router(routes);
+    router.go("home");
   }
 }
