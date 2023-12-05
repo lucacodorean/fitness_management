@@ -1,18 +1,19 @@
 package backend;
 
-import java.io.Closeable;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class Variables implements Closeable {
+public class VariablesSingleton {
+
+  private static VariablesSingleton instance;
 
   public String CONNECTION_URL = "";
   public String CONNECTION_USER = "";
   public String CONNECTION_PASS = "";
 
-  public Variables() {
+  private VariablesSingleton() {
     Properties prop = new Properties();
     try (InputStream input = new FileInputStream("config.properties")) {
       prop.load(input);
@@ -25,9 +26,11 @@ public class Variables implements Closeable {
     }
   }
 
-  @Override
-  public void close() throws IOException {
-    // TODO Auto-generated method stub
-    // throw new UnsupportedOperationException("Unimplemented method 'close'");
+  public static VariablesSingleton getInstance() {
+    if (instance == null) {
+      instance = new VariablesSingleton();
+    }
+
+    return instance;
   }
 }

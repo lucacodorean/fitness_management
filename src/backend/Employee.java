@@ -16,6 +16,8 @@ public class Employee {
   private Integer role;
   private LocalDateTime employementDate;
 
+  public Employee() {}
+
   public Employee(String email, String password) throws SQLException {
     if (!Employee.login(email, password)) {
       System.err.println("Invalid email or password.");
@@ -111,7 +113,7 @@ public class Employee {
 
   private static boolean login(String email, String password)
     throws SQLException {
-    Variables env = new Variables();
+    VariablesSingleton env = VariablesSingleton.getInstance();
     Connection connection = DriverManager.getConnection(
       env.CONNECTION_URL,
       env.CONNECTION_USER,
@@ -141,7 +143,7 @@ public class Employee {
   private static String[] getEmployeeData(String email) throws SQLException {
     String[] result = new String[8];
 
-    Variables env = new Variables();
+    VariablesSingleton env = VariablesSingleton.getInstance();
     Connection connection = DriverManager.getConnection(
       env.CONNECTION_URL,
       env.CONNECTION_USER,
