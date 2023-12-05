@@ -15,6 +15,7 @@ public class Employee {
     private Integer role;
     private LocalDateTime employementDate;
 
+    public Employee() { }
     public Employee(String email, String password) throws SQLException { 
         
         if(!Employee.login(email, password)) {
