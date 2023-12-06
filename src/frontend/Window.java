@@ -18,8 +18,9 @@ public class Window {
 
     frame = new JFrame("Fitness App");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setSize(850, 600);
+    frame.setSize(1280, 1024);
     frame.setLayout(new BorderLayout());
+    frame.setResizable(false);
     frame.add(currentPanel, BorderLayout.CENTER);
     frame.setVisible(true);
     instance = this;

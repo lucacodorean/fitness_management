@@ -1,6 +1,9 @@
 import backend.*;
 import backend.controllers.AboutController;
+import backend.controllers.AuthController;
+import backend.controllers.ControllerRunner;
 import backend.controllers.HomeController;
+import backend.controllers.LoginViewRequest;
 import frontend.*;
 import java.sql.*;
 
@@ -35,10 +38,16 @@ public class App {
     new Window();
 
     Route[] routes = new Route[] {
-      new Route("home", HomeController::index),
-      new Route("about", AboutController::index),
+      new Route("home", new ControllerRunner(HomeController.class, "index")),
+      new Route("about", new ControllerRunner(AboutController.class, "index")),
+      new Route(
+        "login.view",
+        new ControllerRunner(AuthController.class, "view")
+      ),
+      new Route("login", new ControllerRunner(AuthController.class, "login")),
+      new Route("logout", new ControllerRunner(AuthController.class, "logout")),
     };
     Router router = new Router(routes);
-    router.go("home");
+    router.go("login.view", new LoginViewRequest(false));
   }
 }
