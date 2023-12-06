@@ -3,6 +3,8 @@ import backend.controllers.AboutController;
 import backend.controllers.HomeController;
 import frontend.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class App {
 
@@ -24,6 +26,14 @@ public class App {
   }
 
   public static void main(String[] args) throws SQLException {
+
+    Employee model = new Employee();
+    ResultSet result = model.all();
+
+    while(result.next()) {
+      System.out.println(result.getString("email"));
+    }
+    
     try {
       System.out.println(
         connectionTest() ? "Connection established" : "Connection error"
@@ -32,6 +42,7 @@ public class App {
       System.out.println(ex.toString());
     }
 
+    new LoginPage();
     new Window();
 
     Route[] routes = new Route[] {

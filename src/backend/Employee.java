@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
-public class Employee {
+public class Employee extends Model{
 
   private String firstName;
   private String lastName;
