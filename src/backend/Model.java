@@ -1,7 +1,6 @@
 package backend;
 
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +9,13 @@ public abstract class Model {
 
     protected Model() { }
     private static final String WHERE_ID = " where id = ?";
+    private String tableName = null;
+
+    protected void settableName(String value) { this.tableName = value; }
+
+    private String getTable() {
+        return tableName == null ? this.getClass().getSuperclass().getSimpleName().toLowerCase() : tableName;
+    }
 
     public Integer create(List<String> columns, List<String> newValues) throws SQLException {
         DatabaseManager database = new DatabaseManager();
@@ -31,7 +37,7 @@ public abstract class Model {
         columnsStr.deleteCharAt(columnsStr.lastIndexOf(","));
         parametersStr.deleteCharAt(parametersStr.lastIndexOf(","));
 
-        return database.updatePreparedSQL("insert into " + this.getClass().getSimpleName().toLowerCase() + 
+        return database.updatePreparedSQL("insert into " + getTable() + 
             "(" + columnsStr +") values (" + parametersStr + ")" , parameters
         );
     }
@@ -43,7 +49,7 @@ public abstract class Model {
         List<String>parameters = new ArrayList<String>();
         parameters.add(id.toString());
         ResultSet temp = database.selectPreparedSQL("select * from " + 
-            this.getClass().getSimpleName().toLowerCase() + WHERE_ID, parameters
+            getTable() + WHERE_ID, parameters
         );
 
         return temp.next() ? temp : null;
@@ -53,7 +59,7 @@ public abstract class Model {
         DatabaseManager database = new DatabaseManager();
         List<String>parameters = new ArrayList<String>();
 
-        ResultSet temp = database.selectPreparedSQL("select * from " + this.getClass().getSimpleName().toLowerCase(), parameters);
+        ResultSet temp = database.selectPreparedSQL("select * from " + getTable(), parameters);
         temp.next();
 
         return temp;
@@ -76,7 +82,7 @@ public abstract class Model {
 
         columnsParameters.deleteCharAt(columnsParameters.lastIndexOf(","));
 
-        return database.updatePreparedSQL("update " + this.getClass().getSimpleName().toLowerCase() + 
+        return database.updatePreparedSQL("update " + getTable() + 
             " set " + columnsParameters + WHERE_ID , parameters
         );
     }
@@ -87,7 +93,7 @@ public abstract class Model {
         parameters.add(id.toString());
 
         database.updatePreparedSQL("delete from " +
-            this.getClass().getSimpleName().toLowerCase() + WHERE_ID, parameters
+            getTable() + WHERE_ID, parameters
         );
 
         return this.find(id) == null;
