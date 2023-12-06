@@ -1,5 +1,6 @@
 package backend;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,6 +12,8 @@ import java.util.List;
 public class DatabaseManager {
 
     private Connection connection;
+
+    public Connection getConnection() { return this.connection; }
 
     public DatabaseManager() {
         VariablesSingleton env = VariablesSingleton.getInstance();
@@ -26,12 +29,12 @@ public class DatabaseManager {
 
     public ResultSet selectPreparedSQL(String statement, List<String> parameters) throws SQLException {
         try {
-            PreparedStatement statement2 = this.connection.prepareStatement(statement);
+            PreparedStatement command = this.connection.prepareStatement(statement);
             for(int i = 0; i<parameters.size(); i++) {
-                statement2.setString(i+1, parameters.get(i));
+                command.setString(i+1, parameters.get(i));
             }
             
-            return statement2.executeQuery();
+            return command.executeQuery();
         } catch(SQLException ex) {
             System.err.println(ex.toString());
             return null;
@@ -39,11 +42,30 @@ public class DatabaseManager {
     }
 
     public Integer updatePreparedSQL(String statement, List<String> parameters) throws SQLException {
-        PreparedStatement statement2 = this.connection.prepareStatement(statement);
-        for(int i = 0; i<parameters.size(); i++) {
-            statement2.setString(i+1, parameters.get(i));
+        try {
+            PreparedStatement command = this.connection.prepareStatement(statement);
+            for(int i = 0; i<parameters.size(); i++) {
+                command.setString(i+1, parameters.get(i));
+            }
+            
+            return command.executeUpdate();
+        } catch(SQLException ex) {
+            System.err.println(ex.toString());
+            return null;
         }
-        
-        return statement2.executeUpdate();
+    }
+
+    public ResultSet callableSQL(String statement, List<String> parameters) throws SQLException {
+        try {
+            CallableStatement command = this.connection.prepareCall(statement);
+            for(int i = 0; i<parameters.size(); i++) {
+                command.setString(i+1, parameters.get(i));
+            }
+
+            return command.executeQuery();
+        } catch(SQLException ex) {
+            System.err.println(ex.toString());
+            return null;
+        }
     }
 }
