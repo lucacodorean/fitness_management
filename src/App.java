@@ -1,4 +1,6 @@
 import backend.*;
+import backend.controllers.AboutController;
+import backend.controllers.HomeController;
 import frontend.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -41,5 +43,13 @@ public class App {
     }
 
     new LoginPage();
+    new Window();
+
+    Route[] routes = new Route[] {
+      new Route("home", HomeController::index),
+      new Route("about", AboutController::index),
+    };
+    Router router = new Router(routes);
+    router.go("home");
   }
 }
