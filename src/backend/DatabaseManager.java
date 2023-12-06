@@ -25,12 +25,17 @@ public class DatabaseManager {
     }
 
     public ResultSet selectPreparedSQL(String statement, List<String> parameters) throws SQLException {
-        PreparedStatement statement2 = this.connection.prepareStatement(statement);
-        for(int i = 0; i<parameters.size(); i++) {
-            statement2.setString(i+1, parameters.get(i));
-        }
-        
-        return statement2.executeQuery();
+        try {
+            PreparedStatement statement2 = this.connection.prepareStatement(statement);
+            for(int i = 0; i<parameters.size(); i++) {
+                statement2.setString(i+1, parameters.get(i));
+            }
+            
+            return statement2.executeQuery();
+        } catch(SQLException ex) {
+            System.err.println(ex.toString());
+            return null;
+        } 
     }
 
     public Integer updatePreparedSQL(String statement, List<String> parameters) throws SQLException {

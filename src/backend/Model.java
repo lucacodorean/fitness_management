@@ -1,6 +1,7 @@
 package backend;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ public abstract class Model {
     protected Model() { }
     private static final String WHERE_ID = " where id = ?";
 
-      public Integer create(List<String> columns, List<String> newValues) throws SQLException {
+    public Integer create(List<String> columns, List<String> newValues) throws SQLException {
         DatabaseManager database = new DatabaseManager();
         List<String>parameters = new ArrayList<String>();
 
@@ -46,6 +47,16 @@ public abstract class Model {
         );
 
         return temp.next() ? temp : null;
+    }
+
+    public ResultSet all() throws SQLException {
+        DatabaseManager database = new DatabaseManager();
+        List<String>parameters = new ArrayList<String>();
+
+        ResultSet temp = database.selectPreparedSQL("select * from " + this.getClass().getSimpleName().toLowerCase(), parameters);
+        temp.next();
+
+        return temp;
     }
 
     public Integer update(Integer id, List<String> columns, List<String> newValues) throws SQLException {
