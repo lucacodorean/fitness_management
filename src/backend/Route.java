@@ -3,14 +3,14 @@ package backend;
 public class Route {
 
   public String url;
-  public Runnable action;
+  public IControllerRunner action;
 
-  public Route(String url, Runnable action) {
+  public Route(String url, IControllerRunner action) {
     this.url = url;
     this.action = action;
   }
 
-  public void execute() {
-    action.run();
+  public void execute(IRequest request) {
+    action.run(request);
   }
 }

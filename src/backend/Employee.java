@@ -18,10 +18,10 @@ public class Employee extends Model{
 
   public Employee() {}
 
-  public Employee(String email, String password) throws SQLException {
+  public Employee(String email, String password) throws Exception {
     if (!Employee.login(email, password)) {
       System.err.println("Invalid email or password.");
-      return;
+      throw new Exception("Invalid email pr password");
     }
 
     System.out.println("Welcome, " + email + "!");

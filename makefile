@@ -1,46 +1,24 @@
-# Define variables
-SRC_DIR = src
-BACKEND_DIR = src/backend
-FRONTEND_DIR = src/fronted
-BIN_DIR = bin
-JAVAC = javac
-JAVA = java
-JFLAGS = -d $(BIN_DIR) --enable-preview --source 21
-CP = -cp $(BIN_DIR):lib/mysql-connector-java-8.0.22.jar
+JC = javac
+JFLAGS = -sourcepath ./src -d bin --enable-preview --source 21 -g
 
-# Define Java source files
-SRCS = $(wildcard $(SRC_DIR)/**/*.java)
-SRCS2 = $(wildcard $(SRC_DIR)/backend/controllers/*.java)
+.SUFFIXES: .java .class
 
-# Define class files
-CLASSES = $(patsubst $(SRC_DIR)/%.java,$(BIN_DIR)/%.class,$(SRCS))
-CONTROLLERS = $(patsubst $(SRC_DIR)/backend/controllers/%.java,$(BIN_DIR)/backend/controllers/%.class,$(SRCS2))
-VARIABLE_SRC = $(SRC_DIR)/backend/VariablesSingleton.java
-VARIABLE_CLASS = $(BIN_DIR)/VariablesSingleton.class
+SRC_DIR = ./src
+BUILD_DIR = ./bin
 
-# Default target
-all: $(VARIABLE_CLASS) $(CLASSES) $(CONTROLLERS) $(ABSTRACTS)
+SRCS = $(shell find $(SRC_DIR) -name "*.java")
+CLASSES = $(SRCS:$(SRC_DIR)/%.java=$(BUILD_DIR)/%.class)
 
-# Compile .java files to .class files
-$(VARIABLE_CLASS): $(VARIABLE_SRC)
+default: classes
+
+$(BUILD_DIR)/%.class: $(SRC_DIR)/%.java
 	@mkdir -p $(@D)
-	$(JAVAC) $(JFLAGS) $(CP) $<
+	$(JC) $(JFLAGS) $<
 
-$(BIN_DIR)/backend/controllers/%.class: $(CONTROLLERS)/%.java
-	@mkdir -p $(@D)
-	$(JAVAC) $(JFLAGS) $(CP) $<
+classes: $(CLASSES)
 
-$(BIN_DIR)/%.class: $(SRC_DIR)/%.java
-	@mkdir -p $(@D)
-	$(JAVAC) $(JFLAGS) $(CP) $<
+run: default
+	java --enable-preview -cp bin:lib/mysql-connector-java-8.0.22.jar App
 
-# Run the main class
-run: all
-	$(JAVA) $(CP) --enable-preview --source 21 src/App.java
-
-# Clean compiled files
-clean:
-	rm -rf $(BIN_DIR)
-
-# Phony targets
-.PHONY: all run clean
+clean: 
+	rm -rf bin
