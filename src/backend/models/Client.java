@@ -83,6 +83,38 @@ public class Client extends Model {
         return checkedClient;   
     }
 
+    public static String[] getColumns() {
+        return new String[] {
+          "ID",
+          "Nume",
+          "Prenume",
+          "Email",
+          "Are abonament platit",
+          "Tip abonament",
+          "Urmatoarea scadenta",
+        };
+      }
+    
+    public Client[] getTableDataFormat() {
+        try {
+            ResultSet set = this.all();
+            Client[] data = new Client[Client.count(this.all())];
+    
+            if (data.length == 0) return new Client[0];
+            int i = 0;
+        
+            while (set.next()) {
+                data[i++] = Client.getDetails(set.getInt(1));
+            }
+        
+            return data;
+
+        } catch (SQLException e) {
+                e.printStackTrace();
+                return new Client[0];
+            }
+    }
+
     @Override
     public String toString() {
         return 
