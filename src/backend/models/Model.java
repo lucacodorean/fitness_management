@@ -9,95 +9,129 @@ import backend.DatabaseManager;
 
 public abstract class Model {
 
-    protected Model() { }
-    private static final String WHERE_ID = " where id = ?";
-    private String tableName = null;
+  protected Model() {}
 
-    protected void settableName(String value) { this.tableName = value; }
+  private static final String WHERE_ID = " where id = ?";
+  private String tableName = null;
 
-    private String getTable() {
-        return tableName == null ? this.getClass().getSuperclass().getSimpleName().toLowerCase() : tableName;
+  protected void settableName(String value) {
+    this.tableName = value;
+  }
+
+  private String getTable() {
+    return tableName == null
+      ? this.getClass().getSuperclass().getSimpleName().toLowerCase()
+      : tableName;
+  }
+
+  public Integer create(List<String> columns, List<String> newValues)
+    throws SQLException {
+    DatabaseManager database = new DatabaseManager();
+    List<String> parameters = new ArrayList<String>();
+
+    StringBuilder columnsStr = new StringBuilder();
+    StringBuilder parametersStr = new StringBuilder();
+
+    for (String currentString : columns) {
+      columnsStr.append(currentString + ", ");
     }
 
-    public Integer create(List<String> columns, List<String> newValues) throws SQLException {
-        DatabaseManager database = new DatabaseManager();
-        List<String>parameters = new ArrayList<String>();
-
-        
-        StringBuilder columnsStr = new StringBuilder();
-        StringBuilder parametersStr = new StringBuilder();
-        
-        for(String currentString : columns) {
-            columnsStr.append(currentString + ", ");
-        }
-        
-        for(int i = 0; i<newValues.size(); i++) {
-            parameters.add(newValues.get(i));
-            parametersStr.append("?, ");
-        }
-
-        columnsStr.deleteCharAt(columnsStr.lastIndexOf(","));
-        parametersStr.deleteCharAt(parametersStr.lastIndexOf(","));
-
-        return database.updatePreparedSQL("insert into " + getTable() + 
-            "(" + columnsStr +") values (" + parametersStr + ")" , parameters
-        );
+    for (int i = 0; i < newValues.size(); i++) {
+      parameters.add(newValues.get(i));
+      parametersStr.append("?, ");
     }
 
-    public ResultSet find(Integer id) throws SQLException {
+    columnsStr.deleteCharAt(columnsStr.lastIndexOf(","));
+    parametersStr.deleteCharAt(parametersStr.lastIndexOf(","));
 
-        DatabaseManager database = new DatabaseManager();
+    return database.updatePreparedSQL(
+      "insert into " +
+      getTable() +
+      "(" +
+      columnsStr +
+      ") values (" +
+      parametersStr +
+      ")",
+      parameters
+    );
+  }
 
-        List<String>parameters = new ArrayList<String>();
-        parameters.add(id.toString());
-        ResultSet temp = database.selectPreparedSQL("select * from " + 
-            getTable() + WHERE_ID, parameters
-        );
+  public ResultSet find(Integer id) throws SQLException {
+    DatabaseManager database = new DatabaseManager();
 
-        return temp.next() ? temp : null;
+    List<String> parameters = new ArrayList<String>();
+    parameters.add(id.toString());
+    ResultSet temp = database.selectPreparedSQL(
+      "select * from " + getTable() + WHERE_ID,
+      parameters
+    );
+
+    return temp.next() ? temp : null;
+  }
+
+  public ResultSet all() throws SQLException {
+    DatabaseManager database = new DatabaseManager();
+    List<String> parameters = new ArrayList<>();
+    ResultSet temp = database.selectPreparedSQL(
+      "select * from " + getTable(),
+      parameters
+    );
+
+    return temp;
+  }
+
+  public Integer update(
+    Integer id,
+    List<String> columns,
+    List<String> newValues
+  ) throws SQLException {
+    DatabaseManager database = new DatabaseManager();
+    List<String> parameters = new ArrayList<String>();
+
+    for (int i = 0; i < newValues.size(); i++) {
+      parameters.add(newValues.get(i));
     }
 
-    public ResultSet all() throws SQLException {
-        DatabaseManager database = new DatabaseManager();
-        List<String>parameters = new ArrayList<String>();
+    parameters.add(id.toString());
 
-        ResultSet temp = database.selectPreparedSQL("select * from " + getTable(), parameters);
-        temp.next();
-
-        return temp;
+    StringBuilder columnsParameters = new StringBuilder();
+    for (String currentString : columns) {
+      columnsParameters.append(currentString + " = ?, ");
     }
 
-    public Integer update(Integer id, List<String> columns, List<String> newValues) throws SQLException {
-        DatabaseManager database = new DatabaseManager();
-        List<String>parameters = new ArrayList<String>();
+    columnsParameters.deleteCharAt(columnsParameters.lastIndexOf(","));
 
-        for(int i = 0; i<newValues.size(); i++) {
-            parameters.add(newValues.get(i));
-        }
+    return database.updatePreparedSQL(
+      "update " + getTable() + " set " + columnsParameters + WHERE_ID,
+      parameters
+    );
+  }
 
-        parameters.add(id.toString());
+  public Boolean delete(Integer id) throws SQLException {
+    DatabaseManager database = new DatabaseManager();
+    List<String> parameters = new ArrayList<String>();
+    parameters.add(id.toString());
 
-        StringBuilder columnsParameters = new StringBuilder();
-        for(String currentString : columns) {
-            columnsParameters.append(currentString + " = ?, ");
-        }
+    database.updatePreparedSQL(
+      "delete from " + getTable() + WHERE_ID,
+      parameters
+    );
 
-        columnsParameters.deleteCharAt(columnsParameters.lastIndexOf(","));
+    return this.find(id) == null;
+  }
 
-        return database.updatePreparedSQL("update " + getTable() + 
-            " set " + columnsParameters + WHERE_ID , parameters
-        );
+  public static Integer count(ResultSet resultSet) {
+    Integer rowCount = 0;
+
+    try {
+      while (resultSet.next()) {
+        rowCount++;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return 0;
     }
 
-    public Boolean delete(Integer id) throws SQLException {
-        DatabaseManager database = new DatabaseManager();
-        List<String>parameters = new ArrayList<String>();
-        parameters.add(id.toString());
-
-        database.updatePreparedSQL("delete from " +
-            getTable() + WHERE_ID, parameters
-        );
-
-        return this.find(id) == null;
-    }
+    return rowCount;
+  }
 }

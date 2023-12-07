@@ -52,16 +52,35 @@ public class Client extends Model {
     }
 
     public static Client getDetails(Integer id) throws SQLException {
+        Client checkedClient = new Client();
 
-        ResultSet temp = new Client().find(id);
+        ResultSet temp = checkedClient.find(id);
         
-        return temp != null ? new Client(
-            temp.getInt(1), temp.getString(2), temp.getString(3), temp.getString(4),
-            temp.getBoolean(5), Subscription.getDetails(temp.getInt(6)), 
-            LocalDateTime.parse(
-                temp.getString(7), 
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-            )) : null ;
+        if(temp != null) {
+            checkedClient.setId(temp.getInt(1));
+            checkedClient.setFirstName(temp.getString(2));
+            checkedClient.setLastName(temp.getString(3));
+            checkedClient.setEmail(temp.getString(4));
+            checkedClient.setIsSubscribed(temp.getBoolean(5));
+            
+            Subscription tempSubscription = new Subscription();
+            
+            ResultSet temp2 = tempSubscription.find(temp.getInt(6));
+            if(temp2 != null) {
+                tempSubscription = new Subscription(
+                    temp2.getInt(1), temp2.getInt(2), temp2.getString(3)
+                    );
+                }
+
+                checkedClient.setSubscription(tempSubscription);
+                checkedClient.setNextPaymentAt(LocalDateTime.parse(
+                    temp.getString(7), 
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                   
+            );
+        }
+
+        return checkedClient;   
     }
 
     @Override

@@ -45,6 +45,7 @@ public class App {
       new Route("logout", new ControllerRunner(AuthController.class, "logout")),
     };
     Router router = new Router(routes);
-    router.go("login.view", new LoginViewRequest(false));
+    // router.go("login.view", new LoginViewRequest(false));
+    router.go("login", new LoginRequest("admin@myfitness.com", "parola"));
   }
 }
