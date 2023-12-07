@@ -3,6 +3,7 @@ import backend.controllers.AboutController;
 import backend.controllers.AuthController;
 import backend.controllers.ControllerRunner;
 import backend.controllers.HomeController;
+import backend.controllers.LoginRequest;
 import backend.controllers.LoginViewRequest;
 import frontend.*;
 import java.sql.*;
@@ -27,13 +28,6 @@ public class App {
   }
 
   public static void main(String[] args) throws Exception {
-
-    //Trainer model = new Trainer("trainer@myfitness.com", "parola");
-    
-    Client client = Client.getDetails(1);
-
-    System.out.println(client.toString());
-
     try {
       System.out.println(
         connectionTest() ? "Connection established" : "Connection error"
@@ -54,6 +48,7 @@ public class App {
       new Route("logout", new ControllerRunner(AuthController.class, "logout")),
     };
     Router router = new Router(routes);
-    router.go("login.view", new LoginViewRequest(false));
+    // router.go("login.view", new LoginViewRequest(false));
+    router.go("login", new LoginRequest("admin@myfitness.com", "parola"));
   }
 }
