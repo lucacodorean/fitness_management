@@ -1,7 +1,8 @@
 package frontend;
 
-import backend.Router;
 import backend.StateManager;
+import backend.routes.Router;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,14 +1,15 @@
 package frontend;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import backend.routes.Router;
 
 public class AboutPage {
+
+  private AboutPage() { }
 
   public static JPanel build(Router router) {
     JPanel panel = new JPanel();
@@ -17,12 +18,7 @@ public class AboutPage {
     panel.add(goToPanel1Button);
 
     goToPanel1Button.addActionListener(
-      new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-          router.go("home");
-        }
-      }
+      e -> router.go("home")
     );
     return panel;
   }
