@@ -1,3 +1,3 @@
-package backend;
+package backend.contracts;
 
 public interface IRequest {}

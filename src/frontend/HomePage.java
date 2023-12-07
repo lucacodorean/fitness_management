@@ -1,8 +1,5 @@
 package frontend;
 
-import backend.Client;
-import backend.Employee;
-import backend.Router;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,6 +15,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.AbstractTableModel;
+
+import backend.models.Client;
+import backend.models.Employee;
+import backend.routes.Router;
 
 public class HomePage {
 

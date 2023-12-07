@@ -1,12 +1,8 @@
 import backend.*;
-import backend.controllers.AboutController;
-import backend.controllers.AuthController;
-import backend.controllers.ControllerRunner;
-import backend.controllers.HomeController;
-import backend.controllers.LoginRequest;
-import backend.controllers.LoginViewRequest;
 import frontend.*;
 import java.sql.*;
+import backend.routes.*;
+import backend.controllers.*;
 
 public class App {
 
@@ -28,6 +24,7 @@ public class App {
   }
 
   public static void main(String[] args) throws Exception {
+
     try {
       System.out.println(
         connectionTest() ? "Connection established" : "Connection error"

@@ -1,6 +1,6 @@
 package backend.controllers;
 
-import backend.IRequest;
+import backend.contracts.IRequest;
 
 public class LoginRequest implements IRequest {
 

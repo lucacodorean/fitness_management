@@ -1,9 +1,8 @@
 package backend.controllers;
 
-import backend.Employee;
-import backend.IController;
-import backend.Router;
 import backend.StateManager;
+import backend.models.Employee;
+import backend.routes.Router;
 import frontend.LoginPage;
 import frontend.Window;
 

@@ -1,8 +1,10 @@
 package backend;
 
+import backend.models.Employee;
+
 public class StateManager {
 
-  public static StateManager instance;
+  private static StateManager instance;
 
   private Employee auth = null;
 
