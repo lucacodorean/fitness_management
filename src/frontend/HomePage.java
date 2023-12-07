@@ -1,7 +1,8 @@
 package frontend;
 
-import backend.Employee;
-import backend.Router;
+import backend.models.Employee;
+import backend.routes.Router;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

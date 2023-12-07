@@ -1,8 +1,7 @@
 package backend.controllers;
 
-import backend.IController;
-import backend.Router;
 import backend.StateManager;
+import backend.routes.Router;
 import frontend.HomePage;
 import frontend.Window;
 

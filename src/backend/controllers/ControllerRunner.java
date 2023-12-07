@@ -1,9 +1,8 @@
 package backend.controllers;
 
-import backend.IController;
-import backend.IControllerRunner;
-import backend.IRequest;
 import java.lang.reflect.Method;
+
+import backend.contracts.IRequest;
 
 public class ControllerRunner implements IControllerRunner {
 

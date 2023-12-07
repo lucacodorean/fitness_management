@@ -1,11 +1,8 @@
 import backend.*;
-import backend.controllers.AboutController;
-import backend.controllers.AuthController;
-import backend.controllers.ControllerRunner;
-import backend.controllers.HomeController;
-import backend.controllers.LoginViewRequest;
 import frontend.*;
 import java.sql.*;
+import backend.routes.*;
+import backend.controllers.*;
 
 public class App {
 
@@ -27,12 +24,6 @@ public class App {
   }
 
   public static void main(String[] args) throws Exception {
-
-    //Trainer model = new Trainer("trainer@myfitness.com", "parola");
-    
-    Client client = Client.getDetails(1);
-
-    System.out.println(client.toString());
 
     try {
       System.out.println(

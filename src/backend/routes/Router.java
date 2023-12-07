@@ -1,4 +1,6 @@
-package backend;
+package backend.routes;
+
+import backend.contracts.IRequest;
 
 public class Router {
 
