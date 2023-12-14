@@ -13,7 +13,7 @@ create table if not exists clients(
     lastname		varchar(20)  NOT NULL,
     email			varchar(25)  NOT NULL UNIQUE,
 	has_active_sub	boolean 	 NOT NULL DEFAULT false,
-    subscription_id	int			 NOT NULL DEFAULT 0,
+    subscription_id	int			 NOT NULL DEFAULT 4,
     next_payment_at timestamp,
     
     CONSTRAINT c1 FOREIGN KEY(subscription_id) REFERENCES subscriptions(id)
