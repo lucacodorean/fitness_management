@@ -27,7 +27,8 @@ INSERT INTO jurnal_events(descr) VALUES
 INSERT INTO subscriptions(price, description) VALUES 
 	(150, "Abonament basic lunar. Acces general in sala."),
 	(175, "Abonament permium lunar. Acces general in sala si la sauna."),
-    (240, "Abonament all inclusive lunar. Acces la toate facilitatile salii, plus snack la inceputul antrenamentului."); 
+    (240, "Abonament all inclusive lunar. Acces la toate facilitatile salii, plus snack la inceputul antrenamentului.");
+	(-1, "Placeholder pentru abonamente.");
 
 INSERT INTO clients(firstname, lastname, email, subscription_id) VALUES 
 	("Client", "Dummy", "client@myfitness.com", 1);
