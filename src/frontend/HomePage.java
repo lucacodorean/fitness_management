@@ -19,6 +19,11 @@ import javax.swing.table.AbstractTableModel;
 import backend.models.Client;
 import backend.models.Employee;
 import backend.routes.Router;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class HomePage {
 
@@ -52,7 +57,15 @@ public class HomePage {
       new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          // TODO: redirect to create client form
+          Platform.runLater(() -> {
+              try {
+              FXMLLoader loader = new FXMLLoader(getClass().getResource("clients_create.fxml"));
+              Stage stage = new Stage();
+              stage.setScene(new Scene(loader.load()));
+              stage.show();
+            }
+            catch(Exception ex) { System.out.println(ex.toString());}
+          });
         }
       }
     );
