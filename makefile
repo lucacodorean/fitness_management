@@ -8,13 +8,13 @@ BUILD_DIR = ./bin
 
 SRCS = $(shell find $(SRC_DIR) -name "*.java")
 CLASSES = $(SRCS:$(SRC_DIR)/%.java=$(BUILD_DIR)/%.class)
-FXML_FILES := $(wildcard $(SRC_DIR)/frontend/fxml/*.fxml)
+FXML_FILES := $(wildcard $(SRC_DIR)/frontend/views/*.fxml)
 
 default: move_fxml_files
 
 move_fxml_files: classes
-	@mkdir -p $(BUILD_DIR)/frontend/fxml
-	@cp $(FXML_FILES) $(BUILD_DIR)/frontend/fxml
+	@mkdir -p $(BUILD_DIR)/frontend/views
+	@cp $(FXML_FILES) $(BUILD_DIR)/frontend/views
 
 $(BUILD_DIR)/%.class: $(SRC_DIR)/%.java
 	@mkdir -p $(@D)

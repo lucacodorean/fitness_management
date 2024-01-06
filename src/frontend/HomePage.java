@@ -9,11 +9,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.net.URL;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javax.swing.Box;
@@ -60,15 +57,6 @@ public class HomePage {
         public void actionPerformed(ActionEvent e) {
           Platform.runLater(() -> {
             try {
-              String fxmlLocation = "fxml/clients_create.fxml";
-              URL location = HomePage.class.getResource(fxmlLocation);
-              if (location == null) {
-                System.out.println(HomePage.class.getResource(""));
-                throw new FileNotFoundException(
-                  "FXML file not found: " + fxmlLocation
-                );
-              }
-
               FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("fxml/clients_create.fxml")
               );

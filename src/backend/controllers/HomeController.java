@@ -1,6 +1,5 @@
 package backend.controllers;
 
-
 import backend.StateManager;
 import backend.models.Client;
 import backend.routes.Router;
@@ -17,15 +16,16 @@ public class HomeController implements IController {
       return;
     }
 
-    Window
-      .getInstance()
-      .changePanel(
-        HomePage.build(
-          Router.getInstance(),
-          state.getAuth(),
-          new Client().getTableDataFormat(),
-          Client.getColumns()
-        )
-      );
+    Window.getInstance().setView("homepage");
+    // Window
+    //   .getInstance()
+    //   .changePanel(
+    //     HomePage.build(
+    //       Router.getInstance(),
+    //       state.getAuth(),
+    //       new Client().getTableDataFormat(),
+    //       Client.getColumns()
+    //     )
+    //   );
   }
 }

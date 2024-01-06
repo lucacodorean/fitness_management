@@ -9,9 +9,7 @@ import frontend.Window;
 public class AuthController implements IController {
 
   public static void view(LoginViewRequest request) {
-    Window
-      .getInstance()
-      .changePanel(LoginPage.build(Router.getInstance(), request.getError()));
+    Window.getInstance().setView("login");
   }
 
   public static void login(LoginRequest request) {
