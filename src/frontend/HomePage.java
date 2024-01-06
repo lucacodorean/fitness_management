@@ -1,11 +1,18 @@
 package frontend;
 
+import backend.models.Client;
+import backend.models.Employee;
+import backend.routes.Router;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,15 +22,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.AbstractTableModel;
-
-import backend.models.Client;
-import backend.models.Employee;
-import backend.routes.Router;
-import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 public class HomePage {
 
@@ -58,13 +56,16 @@ public class HomePage {
         @Override
         public void actionPerformed(ActionEvent e) {
           Platform.runLater(() -> {
-              try {
-              FXMLLoader loader = new FXMLLoader(getClass().getResource("clients_create.fxml"));
+            try {
+              FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("fxml/clients_create.fxml")
+              );
               Stage stage = new Stage();
               stage.setScene(new Scene(loader.load()));
               stage.show();
+            } catch (Exception ex) {
+              System.out.println(ex.toString());
             }
-            catch(Exception ex) { System.out.println(ex.toString());}
           });
         }
       }
