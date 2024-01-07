@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="903.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.ClientInformationController">
+   <top>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: bc3020;" BorderPane.alignment="CENTER">
+         <left>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
+               <top>
+                  <Label text="Client's information" textFill="WHITE" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </top>
+               <center>
+                  <ImageView fx:id="pbClientImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../../resources/clientIcon.png" />
+                     </image>
+                  </ImageView>
+               </center>
+            </BorderPane>
+         </left>
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="360.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="372.0" minWidth="10.0" prefWidth="343.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="126.0" minHeight="10.0" prefHeight="107.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <BorderPane prefHeight="47.0" prefWidth="352.0" GridPane.rowIndex="1">
+                     <left>
+                        <Label style="-fx-background-color: transparent;" text="Email address:" textFill="WHITE" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </left>
+                     <center>
+                        <Label fx:id="lblEmail" style="-fx-background-color: transparent;" text="email@placeholder.com" textFill="WHITE" BorderPane.alignment="CENTER_LEFT">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <BorderPane.margin>
+                              <Insets left="20.0" />
+                           </BorderPane.margin>
+                        </Label>
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="116.0" prefWidth="360.0" GridPane.rowIndex="2">
+                     <top>
+                        <Label prefHeight="17.0" prefWidth="190.0" style="-fx-background-color: transparent;" text="Client's subscription information" textFill="WHITE" BorderPane.alignment="TOP_LEFT">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                     </top>
+                     <left>
+                        <Label fx:id="lblSubscriptionInformation" prefHeight="61.0" prefWidth="349.0" style="-fx-background-color: transparent;" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent facilisis ipsum ac tristique dignissim. Praesent fermentum ornare dui ac ornare." textFill="WHITE" textOverrun="CLIP" wrapText="true" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </left>
+                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <top>
+                        <Label alignment="CENTER" prefHeight="32.0" prefWidth="343.0" style="-fx-background-color: transparent;" text="SUBSCRIPTION STATUS" textFill="WHITE" textOverrun="CLIP" wrapText="true" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </top>
+                     <left>
+                        <Label fx:id="lblSubscriptionStatus" prefHeight="27.0" prefWidth="160.0" style="-fx-background-color: transparent;" text="STATUS PLACEHOLDER" textFill="WHITE" textOverrun="CLIP" wrapText="true" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </left>
+                     <center>
+                        <Button fx:id="btnRenewSubscription" mnemonicParsing="false" prefHeight="41.0" prefWidth="130.0" style="-fx-background-color: transparent;" text="Renew Subscription" textFill="WHITE" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </center>
+                  </BorderPane>
+                  <Label fx:id="lblName" style="-fx-background-color: transparent;" text="Client's name placeholder (firstname + lastname)" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </top>
+   <center>
+      <FlowPane fx:id="flpFeedback" prefHeight="265.0" prefWidth="906.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
