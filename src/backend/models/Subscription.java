@@ -39,8 +39,11 @@ public class Subscription extends Model {
 
   @Override
   public String toString() {
-    return "Subscription [id=" + this.getId() + ", price=" + this.getPrice() +
-        ", description=" + this.getDescription() + "]";
+    return this.getDescription();
+  }
+
+  public String getSubscriptionInfo() {
+    return "Subscription = [id = " + this.getId() + ", description = "+ this.getDescription() + ", price "+ this.getPrice() + "]";
   }
 
   public static Subscription getDetails(Integer id) throws SQLException {

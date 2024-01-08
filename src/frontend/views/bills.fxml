@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: bc3020;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.BillsController">
+   <bottom>
+      <BorderPane prefHeight="75.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <center>
+            <Button fx:id="btnRedirect" mnemonicParsing="false" onAction="#redirectHomepage" prefHeight="58.0" prefWidth="177.0" style="-fx-background-color: bc3020;" text="Return to homepage" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </center>
+      </BorderPane>
+   </bottom>
+   <center>
+      <TableView fx:id="tbBills" prefHeight="248.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="clientsColumn" prefWidth="246.0" text="Client Details" />
+          <TableColumn fx:id="subscriptionColumn" prefWidth="194.0" text="Subscription Details" />
+            <TableColumn fx:id="dateColumn" prefWidth="156.0" text="Payed at" />
+        </columns>
+      </TableView>
+   </center>
+   <top>
+      <BorderPane prefHeight="50.0" prefWidth="590.0" BorderPane.alignment="CENTER" />
+   </top>
+</BorderPane>

@@ -8,8 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane fx:id="bpMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.HomepageController">
+<BorderPane fx:id="bpMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="1164.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.HomepageController">
    <left>
       <VBox fx:id="vbButtons" prefHeight="506.0" prefWidth="146.0" style="-fx-background-color: #bc3020;" BorderPane.alignment="CENTER">
          <children>
@@ -18,7 +17,7 @@
                   <Insets bottom="50.0" />
                </VBox.margin>
             </Separator>
-            <Button fx:id="btnCreate" mnemonicParsing="false" prefHeight="58.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Client nou" textAlignment="JUSTIFY" textFill="WHITE">
+            <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#redirectCreateClient" prefHeight="58.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Client nou" textAlignment="JUSTIFY" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
@@ -28,7 +27,7 @@
                   <Insets bottom="50.0" />
                </VBox.margin>
             </Separator>
-            <Button fx:id="btnViewClient" mnemonicParsing="false" prefHeight="58.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Vizualizare client" textAlignment="JUSTIFY" textFill="WHITE">
+            <Button fx:id="btnTrainings" mnemonicParsing="false" onAction="#redirectTrainings" prefHeight="58.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text=" Antrenamente" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
                <font>
                   <Font size="15.0" />
                </font>
@@ -38,17 +37,7 @@
                   <Insets bottom="50.0" />
                </VBox.margin>
             </Separator>
-            <Button fx:id="btnTrainings" mnemonicParsing="false" prefHeight="58.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text=" Antrenamente" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <Separator prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 0px 0px;">
-               <VBox.margin>
-                  <Insets bottom="50.0" />
-               </VBox.margin>
-            </Separator>
-            <Button fx:id="btnFacturi" mnemonicParsing="false" prefHeight="58.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Facturi" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+            <Button fx:id="btnFacturi" mnemonicParsing="false" onAction="#redirectBills" prefHeight="58.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Facturi" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
                <font>
                   <Font size="15.0" />
                </font>
@@ -76,13 +65,13 @@
             </Separator>
          </bottom>
          <center>
-            <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tbClients" prefHeight="440.0" prefWidth="1002.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn editable="false" prefWidth="75.0" text="Prenume" />
-                <TableColumn editable="false" prefWidth="75.0" text=" Nume" />
-                  <TableColumn editable="false" prefWidth="135.0" text="Active subscription" />
-                  <TableColumn editable="false" prefWidth="111.0" text="Subscription info" />
-                  <TableColumn editable="false" prefWidth="127.0" text="Next payment date" />
+                  <TableColumn fx:id="firstNameColumn" editable="false" prefWidth="75.0" text="Prenume" />
+                  <TableColumn fx:id="lastNameColumn" editable="false" prefWidth="75.0" text=" Nume" />
+                  <TableColumn fx:id="activeSubscriptionColumn" editable="false" prefWidth="135.0" text="Active subscription" />
+                  <TableColumn fx:id="subscriptionInfoColumn" editable="false" prefWidth="111.0" text="Subscription info" />
+                  <TableColumn fx:id="nextPaymentDateColumn" editable="false" prefWidth="127.0" text="Next payment date" />
               </columns>
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
