@@ -4,7 +4,9 @@ import frontend.Window;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -85,10 +87,31 @@ public class Client extends Model {
     
                 try{ 
                     database.updatePreparedSQL("insert into jurnal (client_id, event_id, created_at) values (?,?,?)", parameters);
-                    JOptionPane.showMessageDialog(null,"Inregistrarea in jurnalul de evenimente a intrarii s-a efectuat cu succes.", "SUCCES", JOptionPane.INFORMATION_MESSAGE);
+                    JFrame frame = new JFrame("Notification Box");
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            JOptionPane.showMessageDialog(
+                                frame,
+                                "Inregistrarea in jurnalul de evenimente a intrarii s-a efectuat cu succes.",
+                                "SUCCES",
+                                JOptionPane.INFORMATION_MESSAGE
+                            );
+                        }
+                    });
                 } catch(Exception ex) {
                     System.err.println(ex.toString());
-                    JOptionPane.showMessageDialog(null,"Eroare la scrierea in jurnalul de evenimente.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    
+                    JFrame frame = new JFrame("Notification Box");
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            JOptionPane.showMessageDialog(
+                                frame,
+                                "Eroare la scrierea in jurnalul de evenimente.", 
+                                "ERROR", 
+                                JOptionPane.ERROR_MESSAGE
+                            );
+                        }
+                    });
                 }
             }
         });
@@ -104,10 +127,31 @@ public class Client extends Model {
     
                 try{ 
                     database.updatePreparedSQL("insert into jurnal (client_id, event_id, created_at) values (?,?,?)", parameters);
-                    JOptionPane.showMessageDialog(null,"Inregistrarea in jurnalul de evenimente a iesirii s-a efectuat cu succes.", "SUCCES", JOptionPane.INFORMATION_MESSAGE);
+                    JFrame frame = new JFrame("Notification Box");
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            JOptionPane.showMessageDialog(
+                                frame,
+                                "Inregistrarea in jurnalul de evenimente a intrarii s-a efectuat cu succes.",
+                                "SUCCES",
+                                JOptionPane.INFORMATION_MESSAGE
+                            );
+                        }
+                    });
                 } catch(Exception ex) {
                     System.err.println(ex.toString());
-                    JOptionPane.showMessageDialog(null,"Eroare la scrierea in jurnalul de evenimente.", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+                    JFrame frame = new JFrame("Notification Box");
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            JOptionPane.showMessageDialog(
+                                frame,
+                                "Eroare la scrierea in jurnalul de evenimente.", 
+                                "ERROR", 
+                                JOptionPane.ERROR_MESSAGE
+                            );
+                        }
+                    });
                 }
             }
         });

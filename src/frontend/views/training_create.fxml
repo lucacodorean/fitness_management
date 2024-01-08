@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: bc3020;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.NewTrainingController">
+   <top>
+      <BorderPane prefHeight="108.0" prefWidth="600.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
+         <left>
+            <Label alignment="CENTER" prefHeight="56.0" prefWidth="164.0" text="Programare antrenament" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+         </left>
+         <right>
+            <Button fx:id="btnTrainings" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#redirectTrainings" prefHeight="94.0" prefWidth="144.0" style="-fx-background-color: transparent;" text="Intoarce-te la antrenamente" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </right>
+      </BorderPane>
+   </top>
+   <center>
+      <GridPane prefHeight="234.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="260.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="340.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="97.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="97.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="252.0" text="Data inceperii antrenamentului" textAlignment="RIGHT" textFill="WHITE" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="254.0" text="Data finalizarii antrenamentului" textAlignment="RIGHT" textFill="WHITE" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="247.0" text="Numele clientului" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="TOP" prefHeight="17.0" prefWidth="249.0" text="Numele antrenorului" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cbClients" prefHeight="25.0" prefWidth="257.0" promptText="Selecteaza un client" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cbTrainers" prefHeight="25.0" prefWidth="258.0" promptText="Selecteaza un anternor" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="btnSchedule" mnemonicParsing="false" onAction="#conductSchedule" prefHeight="60.0" prefWidth="172.0" style="-fx-background-color: transparent;" text="Programeaza" textFill="WHITE" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <right>
+                  <TextField fx:id="txtStartSchedule" prefHeight="29.0" prefWidth="102.0" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets right="10.0" />
+                     </BorderPane.margin>
+                  </TextField>
+               </right>
+               <left>
+                  <DatePicker fx:id="dpStartingDate" prefHeight="25.0" prefWidth="149.0" BorderPane.alignment="CENTER" />
+               </left>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <left>
+                  <DatePicker fx:id="dpEndingDate" prefHeight="25.0" prefWidth="149.0" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <TextField fx:id="txtEndSchedule" prefHeight="36.0" prefWidth="101.0" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets right="10.0" />
+                     </BorderPane.margin>
+                  </TextField>
+               </right>
+            </BorderPane>
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>

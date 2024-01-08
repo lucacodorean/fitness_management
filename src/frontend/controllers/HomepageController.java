@@ -6,14 +6,11 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.sql.ResultSet;
 
-import backend.ClientSingleton;
 import backend.models.Client;
 import frontend.Window;
 
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
-
-import javax.swing.JOptionPane;
 
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;

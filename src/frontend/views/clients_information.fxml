@@ -7,9 +7,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="903.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.ClientInformationController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="913.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.ClientInformationController">
    <top>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: bc3020;" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="191.0" prefWidth="903.0" style="-fx-background-color: bc3020;" BorderPane.alignment="CENTER">
          <left>
             <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                <top>
@@ -113,7 +113,11 @@
          </center>
       </BorderPane>
    </top>
-   <center>
-      <FlowPane fx:id="flpFeedback" prefHeight="265.0" prefWidth="906.0" BorderPane.alignment="CENTER" />
-   </center>
+   <bottom>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="277.0" prefWidth="913.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="vbFeedback" prefHeight="276.0" prefWidth="902.0" />
+         </content>
+      </ScrollPane>
+   </bottom>
 </BorderPane>

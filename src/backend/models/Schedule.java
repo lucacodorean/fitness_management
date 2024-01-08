@@ -24,7 +24,7 @@ public class Schedule extends Model {
     public LocalDateTime getTimeEnd()   { return this.timeEnd; }
     public LocalDateTime getTimeStart() { return this.timeStart; }
 
-    private Schedule () {
+    public Schedule () {
         this.settableName("schedule");
     }
 

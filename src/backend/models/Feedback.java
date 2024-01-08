@@ -10,7 +10,7 @@ public class Feedback extends Model {
     private Float       rating;
     private String      description;
 
-    private Feedback() {
+    public Feedback() {
         this.settableName("feedback");
     }
 
