@@ -1,8 +1,16 @@
 package backend.models;
 
+import frontend.Window;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+
+import backend.ClientSingleton;
+import backend.DatabaseManager;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import java.time.format.DateTimeFormatter;
 
 public class Client extends Model {
@@ -15,7 +23,10 @@ public class Client extends Model {
     private Subscription    subscription;
     private LocalDateTime   nextPaymentAt;
 
-    
+    private Button renewSubscription;
+    private Button logEntryIn;
+    private Button logEntryOut;
+
     public void setId(Integer id)                               { this.id = id; }
     public void setEmail(String email)                          { this.email = email; }
     public void setFirstName(String firstName)                  { this.firstName = firstName; }
@@ -31,9 +42,61 @@ public class Client extends Model {
     public Boolean isSubscribed()                               { return this.hasActiveSub; }
     public Subscription getSubscription()                       { return this.subscription; }
     public LocalDateTime getNextPaymentAt()                     { return this.nextPaymentAt; }
+    
+    public Button getLogEntryIn()                               { return this.logEntryIn; }
+    public Button getLogEntryOut()                              { return this.logEntryOut; }
+    public Button getRenewSubscription()                        { return this.renewSubscription; }
+
+    public String getHasActiveSub() { return Boolean.TRUE.equals(hasActiveSub) ? "Da" : "Nu"; }
 
     public Client() {
         this.settableName("clients");
+        renewSubscription = new Button("New Subscription");
+        logEntryOut       = new Button("Log Entry Out");
+        logEntryIn        = new Button("Log Entry In");
+        
+        
+        renewSubscription.setOnAction(new EventHandler<ActionEvent>() {
+            
+            public void handle(ActionEvent e) {
+                try{
+                    ClientSingleton.getCurrentInstance().setClient(Client.getDetails(getId()));
+                    Window.getInstance().setView("renew_subscription"); 
+                } catch(Exception ex) { 
+                    System.err.println(ex.toString());
+                }
+            }
+        });
+
+        logEntryIn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) { 
+                DatabaseManager database = new DatabaseManager();
+                
+                ArrayList<String> parameters = new ArrayList<String>();
+                parameters.add(getId().toString());
+                parameters.add("5");
+                parameters.add(java.time.LocalDateTime.now().toString());
+    
+                try{ 
+                    database.updatePreparedSQL("insert into jurnal (client_id, event_id, created_at) values (?,?,?)", parameters);
+                } catch(Exception ex) {System.err.println(ex.toString());}
+            }
+        });
+
+        logEntryOut.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) { 
+                DatabaseManager database = new DatabaseManager();
+                
+                ArrayList<String> parameters = new ArrayList<String>();
+                parameters.add(getId().toString());
+                parameters.add("6");
+                parameters.add(java.time.LocalDateTime.now().toString());
+    
+                try{ 
+                    database.updatePreparedSQL("insert into jurnal (client_id, event_id, created_at) values (?,?,?)", parameters);
+                } catch(Exception ex) {System.err.println(ex.toString());}
+            }
+        });
     }
 
     public Client(
