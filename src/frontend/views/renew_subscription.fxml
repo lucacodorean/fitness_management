@@ -5,7 +5,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="294.0" prefWidth="672.0" style="-fx-background-color: bc3020;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.RenewSubscriptionController">
    <top>
       <BorderPane prefHeight="94.0" prefWidth="671.0" BorderPane.alignment="CENTER">
@@ -45,7 +44,7 @@
                   </Button>
                </left>
                <right>
-                  <Button fx:id="btnHomepage" mnemonicParsing="false" onAction="#redirectHomepage" prefHeight="104.0" prefWidth="170.0" style="-fx-background-color: transparent;" text="Homepage" textFill="WHITE" BorderPane.alignment="CENTER">
+                  <Button fx:id="btnHomepage" mnemonicParsing="false" onAction="#redirectHomepage" prefHeight="104.0" prefWidth="170.0" style="-fx-background-color: transparent;" text="Return to homepage" textFill="WHITE" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

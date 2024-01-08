@@ -34,10 +34,12 @@ public class RenewSubscriptionController implements Initializable {
             
             ArrayList<String> columns = new ArrayList<String>();
             columns.add("has_active_sub");
+            columns.add("subscription_id");
             columns.add("next_payment_at");
-    
+            
             ArrayList<String> values = new ArrayList<String>();
             values.add("1");
+            values.add(String.valueOf(cbDescriptions.getSelectionModel().getSelectedIndex() + 1));
             values.add((java.time.LocalDateTime.now().plusMonths(1)).toString());
 
             ClientSingleton.getCurrentInstance().getClient().update(

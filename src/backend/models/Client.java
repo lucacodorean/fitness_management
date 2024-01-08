@@ -3,6 +3,9 @@ package backend.models;
 import frontend.Window;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
@@ -23,6 +26,7 @@ public class Client extends Model {
     private Subscription    subscription;
     private LocalDateTime   nextPaymentAt;
 
+    private Button additionalInformation;
     private Button renewSubscription;
     private Button logEntryIn;
     private Button logEntryOut;
@@ -46,11 +50,13 @@ public class Client extends Model {
     public Button getLogEntryIn()                               { return this.logEntryIn; }
     public Button getLogEntryOut()                              { return this.logEntryOut; }
     public Button getRenewSubscription()                        { return this.renewSubscription; }
+    public Button getAdditionalInformation()                    { return this.additionalInformation; }
 
     public String getHasActiveSub() { return Boolean.TRUE.equals(hasActiveSub) ? "Da" : "Nu"; }
 
     public Client() {
         this.settableName("clients");
+        additionalInformation = new Button("Additional information");
         renewSubscription = new Button("New Subscription");
         logEntryOut       = new Button("Log Entry Out");
         logEntryIn        = new Button("Log Entry In");
@@ -79,7 +85,11 @@ public class Client extends Model {
     
                 try{ 
                     database.updatePreparedSQL("insert into jurnal (client_id, event_id, created_at) values (?,?,?)", parameters);
-                } catch(Exception ex) {System.err.println(ex.toString());}
+                    JOptionPane.showMessageDialog(null,"Inregistrarea in jurnalul de evenimente a intrarii s-a efectuat cu succes.", "SUCCES", JOptionPane.INFORMATION_MESSAGE);
+                } catch(Exception ex) {
+                    System.err.println(ex.toString());
+                    JOptionPane.showMessageDialog(null,"Eroare la scrierea in jurnalul de evenimente.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
@@ -94,7 +104,22 @@ public class Client extends Model {
     
                 try{ 
                     database.updatePreparedSQL("insert into jurnal (client_id, event_id, created_at) values (?,?,?)", parameters);
-                } catch(Exception ex) {System.err.println(ex.toString());}
+                    JOptionPane.showMessageDialog(null,"Inregistrarea in jurnalul de evenimente a iesirii s-a efectuat cu succes.", "SUCCES", JOptionPane.INFORMATION_MESSAGE);
+                } catch(Exception ex) {
+                    System.err.println(ex.toString());
+                    JOptionPane.showMessageDialog(null,"Eroare la scrierea in jurnalul de evenimente.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        additionalInformation.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                try{
+                    ClientSingleton.getCurrentInstance().setClient(Client.getDetails(getId()));
+                    Window.getInstance().setView("clients_information"); 
+                } catch(Exception ex) { 
+                    System.err.println(ex.toString());
+                }
             }
         });
     }

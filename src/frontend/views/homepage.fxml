@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="bpMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.HomepageController">
+<BorderPane fx:id="bpMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="1164.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.HomepageController">
    <left>
       <VBox fx:id="vbButtons" prefHeight="506.0" prefWidth="146.0" style="-fx-background-color: #bc3020;" BorderPane.alignment="CENTER">
          <children>
@@ -18,16 +18,6 @@
                </VBox.margin>
             </Separator>
             <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#redirectCreateClient" prefHeight="58.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Client nou" textAlignment="JUSTIFY" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <Separator prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 0px 0px;">
-               <VBox.margin>
-                  <Insets bottom="50.0" />
-               </VBox.margin>
-            </Separator>
-            <Button fx:id="btnViewClient" mnemonicParsing="false" onAction="#redirectViewClient" prefHeight="58.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Vizualizare client" textAlignment="JUSTIFY" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
