@@ -1,6 +1,12 @@
 package backend.controllers;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import backend.DatabaseManager;
+import backend.StateManager;
 import backend.contracts.IRequest;
+import backend.models.Employee;
 
 public class LoginRequest implements IRequest {
 
@@ -10,6 +16,19 @@ public class LoginRequest implements IRequest {
   public LoginRequest(String emailString, String passwordString) {
     setEmail(emailString);
     setPassword(passwordString);
+    try {
+      
+      ArrayList<String> parameters = new ArrayList<>();
+      parameters.add(emailString);
+      parameters.add(passwordString);
+      ResultSet rs = new DatabaseManager().selectPreparedSQL("select * from employee where email = ? and pass = ?", parameters);
+      rs.next();
+  
+      StateManager.getInstance().setAuth(Employee.getDetails(rs.getInt("id")));
+      System.out.println(StateManager.getInstance().getAuth().getRole());
+    } catch (Exception ex) {
+      System.out.println("Eroare la conectare.");
+    }
   }
 
   private void setEmail(String email) {

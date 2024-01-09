@@ -5,8 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: bc3020;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.BillsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="863.0" style="-fx-background-color: bc3020;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.BillsController">
    <bottom>
       <BorderPane prefHeight="75.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <center>
@@ -21,9 +20,9 @@
    <center>
       <TableView fx:id="tbBills" prefHeight="248.0" prefWidth="600.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="clientsColumn" prefWidth="246.0" text="Client Details" />
-          <TableColumn fx:id="subscriptionColumn" prefWidth="194.0" text="Subscription Details" />
-            <TableColumn fx:id="dateColumn" prefWidth="156.0" text="Payed at" />
+          <TableColumn fx:id="tcClientName" prefWidth="152.0" resizable="false" text="Numele clientului" />
+          <TableColumn fx:id="tcSubscriptionDetails" prefWidth="552.0" text="Datele platii" />
+            <TableColumn fx:id="tcDate" minWidth="0.0" prefWidth="157.0" resizable="false" text="Data platii" />
         </columns>
       </TableView>
    </center>

@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 
 import backend.ClientSingleton;
 import backend.DatabaseManager;
+import backend.StateManager;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -248,7 +249,11 @@ public class Client extends Model {
     }
 
     @Override
-    public String toString() {
+    public String toString() { 
+        return this.getFirstName() + " " + this.getLastName();
+    }
+    
+    public String getClientInfo() {
         return 
             "Client [id=" + this.getId() + ", email=" + this.getEmail() + ", lastName=" + this.getLastName() + 
                 ", firstName=" + this.getFirstName() + ", hasActiveSub=" + this.isSubscribed() + 

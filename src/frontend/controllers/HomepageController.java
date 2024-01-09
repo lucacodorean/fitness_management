@@ -6,7 +6,9 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.sql.ResultSet;
 
+import backend.StateManager;
 import backend.models.Client;
+import backend.models.Employee;
 import frontend.Window;
 
 import java.time.LocalDateTime;
@@ -30,7 +32,7 @@ public class HomepageController implements Initializable {
     @FXML private VBox               vbButtons;
     @FXML private Button             btnFacturi;
     @FXML private Button             btnTrainings;
-    @FXML private Button             btnViewClient;
+    @FXML private Button             btnEmployee;
     
     @FXML private TableView<Client>                  tbClients;
     @FXML private TableColumn<Client, String>        lastNameColumn;
@@ -73,6 +75,7 @@ public class HomepageController implements Initializable {
     public void redirectCreateClient(ActionEvent e) { Window.getInstance().setView("clients_create");  }
     public void redirectTrainings(ActionEvent e)    { Window.getInstance().setView("trainings");  }
     public void redirectBills(ActionEvent e)        { Window.getInstance().setView("bills");  }
+    public void redirectEmployee(ActionEvent e)     { Window.getInstance().setView("employees");}
     
     @Override public void initialize(URL url, ResourceBundle rs) {
         setColumnSettings();        
@@ -82,5 +85,19 @@ public class HomepageController implements Initializable {
         logEntryOutColumn.setText("Log Entry Out");                    tbClients.getColumns().add(logEntryOutColumn);
         
         tbClients.setItems(getClients());
+    
+        switch (StateManager.getInstance().getAuth().getRole()) {
+            case 3:
+                btnTrainings.setVisible(false);
+                btnEmployee.setVisible(false);
+                break;
+            case 4:
+                btnFacturi.setVisible(false);
+                btnEmployee.setVisible(false);
+                btnCreate.setVisible(false);
+                break;
+            default:
+                break;
+        }
     }
 }

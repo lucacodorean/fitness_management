@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
 import backend.ClientSingleton;
-import backend.models.Employee;
+import backend.StateManager;
 import backend.models.Feedback;
 import frontend.Window;
 import javafx.collections.FXCollections;
@@ -18,8 +18,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -97,6 +95,8 @@ public class ClientInformationController implements Initializable {
         lblSubscriptionInformation.setText(
             ClientSingleton.getCurrentInstance().getClient().getSubscription().getDescription()
         );
+
+        if(StateManager.getInstance().getAuth().getRole() == 4) btnRenewSubscription.setVisible(false);
 
         getFeedback();
     }
