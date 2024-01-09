@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 
 import backend.StateManager;
 import backend.models.Client;
-import backend.models.Employee;
 import frontend.Window;
 
 import java.time.LocalDateTime;

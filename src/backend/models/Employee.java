@@ -49,7 +49,7 @@ public class Employee extends Model {
         setPassword(tempEmployee.getPassword());
         setWage(tempEmployee.getWage());
         setRating(tempEmployee.getRating());
-        setEmployement(tempEmployee.getEmployment());
+        setEmployement(tempEmployee.getEmploymentDate());
         setRole(tempEmployee.getRole());
       }
     }
@@ -134,7 +134,7 @@ public class Employee extends Model {
     return firstName;
   }
 
-  public LocalDateTime getEmployment() {
+  public LocalDateTime getEmploymentDate() {
     return employementDate;
   }
 
@@ -174,7 +174,7 @@ public class Employee extends Model {
 
     return temp != null ? new Employee(
         temp.getInt(1), temp.getString(2), temp.getString(3), temp.getString(4), temp.getString(5),
-        temp.getFloat(6), temp.getInt(7), temp.getInt(9),
+        temp.getFloat(7), temp.getInt(6), temp.getInt(9),
         LocalDateTime.parse(
             temp.getString(8),
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
@@ -218,7 +218,7 @@ public class Employee extends Model {
     return "Employee [id=" + this.getId() + ", firstName=" + this.getFirstName() +
         ", lastName=" + this.getLastName() + ", email=" + this.getEmail() +
         ", password=" + this.getPassword() + ", rating=" + this.getRating() +
-        ", wage=" + this.getWage() + ", role=" + this.getRole() + ", employementDate=" + this.getEmployment()
+        ", wage=" + this.getWage() + ", role=" + this.getRole() + ", employementDate=" + this.getEmploymentDate()
         + "]";
   }
 }
