@@ -12,32 +12,22 @@
    <left>
       <VBox fx:id="vbButtons" prefHeight="506.0" prefWidth="146.0" style="-fx-background-color: #bc3020;" BorderPane.alignment="CENTER">
          <children>
-            <Separator prefWidth="200.0" style="-fx-background-color: #bd3020; -fx-border-width: 0px 0px 0px 0px;">
-               <VBox.margin>
-                  <Insets bottom="50.0" />
-               </VBox.margin>
-            </Separator>
-            <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#redirectCreateClient" prefHeight="58.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Client nou" textAlignment="JUSTIFY" textFill="WHITE">
+            <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#redirectCreateClient" prefHeight="126.5" prefWidth="146.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Client nou" textAlignment="JUSTIFY" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Separator prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 0px 0px;">
-               <VBox.margin>
-                  <Insets bottom="50.0" />
-               </VBox.margin>
-            </Separator>
-            <Button fx:id="btnTrainings" mnemonicParsing="false" onAction="#redirectTrainings" prefHeight="58.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text=" Antrenamente" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+            <Button fx:id="btnTrainings" mnemonicParsing="false" onAction="#redirectTrainings" prefHeight="126.5" prefWidth="146.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text=" Antrenamente" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Separator prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 0px 0px;">
-               <VBox.margin>
-                  <Insets bottom="50.0" />
-               </VBox.margin>
-            </Separator>
-            <Button fx:id="btnFacturi" mnemonicParsing="false" onAction="#redirectBills" prefHeight="58.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Facturi" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+            <Button fx:id="btnFacturi" mnemonicParsing="false" onAction="#redirectBills" prefHeight="126.5" prefWidth="146.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Facturi" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnEmployee" layoutX="10.0" layoutY="63.0" mnemonicParsing="false" onAction="#redirectEmployee" prefHeight="126.5" prefWidth="146.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Angajati" textAlignment="JUSTIFY" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>

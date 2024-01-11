@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: bc3020;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.EmployeeCreateController">
+   <top>
+      <BorderPane prefHeight="89.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <left>
+            <Label prefHeight="51.0" prefWidth="137.0" text="   Creaza un angajat" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+         </left>
+         <right>
+            <Button fx:id="btnHomepage" mnemonicParsing="false" onAction="#redirectHomepage" prefHeight="96.0" prefWidth="143.0" style="-fx-background-color: bc3020;" text="Return to homepage" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </right>
+      </BorderPane>
+   </top>
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="190.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="439.0" minWidth="10.0" prefWidth="410.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="191.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="219.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="219.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="219.0" minHeight="10.0" prefHeight="135.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="51.0" prefWidth="137.0" text="Nume" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="51.0" prefWidth="137.0" text="Prenume" textFill="WHITE" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="51.0" prefWidth="137.0" text="Adresa de email" textFill="WHITE" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="51.0" prefWidth="137.0" text="Rol" textFill="WHITE" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtLastName" alignment="CENTER" prefHeight="25.0" prefWidth="239.0" GridPane.columnIndex="1" />
+            <TextField fx:id="txtEmail" alignment="CENTER" prefHeight="25.0" prefWidth="239.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtFirstName" alignment="CENTER" prefHeight="25.0" prefWidth="299.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cbRoles" prefHeight="25.0" prefWidth="274.0" promptText="Selecteaza un rol" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="btnCreateAngajat" mnemonicParsing="false" onAction="#create" prefHeight="96.0" prefWidth="191.0" style="-fx-background-color: bc3020;" text="Creaza angajat" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>

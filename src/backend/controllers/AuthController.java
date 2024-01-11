@@ -3,7 +3,6 @@ package backend.controllers;
 import backend.StateManager;
 import backend.models.Employee;
 import backend.routes.Router;
-import frontend.LoginPage;
 import frontend.Window;
 
 public class AuthController implements IController {

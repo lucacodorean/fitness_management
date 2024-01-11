@@ -3,7 +3,6 @@ package backend.controllers;
 import backend.StateManager;
 import backend.models.Client;
 import backend.routes.Router;
-import frontend.HomePage;
 import frontend.Window;
 
 public class HomeController implements IController {
