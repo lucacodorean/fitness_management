@@ -55,8 +55,8 @@ public class App {
       };
 
       Router router = new Router(routes);
-      router.go("login.view", new LoginViewRequest(false));
-      //router.go("login", new LoginRequest("admin@myfitness.com", "parola"));
+      //router.go("login.view", new LoginViewRequest(false));
+      router.go("login", new LoginRequest("mihai@gymtehnica.com", "12345qw!@#m2"));
     });
   }
 }

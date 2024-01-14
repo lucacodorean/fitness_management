@@ -23,11 +23,11 @@ public class LoginRequest implements IRequest {
       parameters.add(passwordString);
       ResultSet rs = new DatabaseManager().selectPreparedSQL("select * from employee where email = ? and pass = ?", parameters);
       rs.next();
-  
+      
       StateManager.getInstance().setAuth(Employee.getDetails(rs.getInt("id")));
-      System.out.println(StateManager.getInstance().getAuth().getRole());
+      System.out.println(StateManager.getInstance().getAuth());
     } catch (Exception ex) {
-      System.out.println("Eroare la conectare.");
+      System.out.println("Eroare la conectare.\n" + ex.toString());
     }
   }
 
