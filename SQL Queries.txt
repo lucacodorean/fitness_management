@@ -1,36 +1,36 @@
 -- SQL Queries
 
-1. Selecteaz? toate abonamentele cu pre?ul mai mare de 50:
+1. Selectează toate abonamentele cu prețul mai mare de 50:
    SELECT * FROM subscriptions WHERE price > 50;
 
-2. Afi?eaz? numele, prenumele ?i email-ul clien?ilor cu abonamente active:
+2. Afi?ează numele, prenumele și email-ul clienților cu abonamente active:
    SELECT firstname, lastname, email FROM clients WHERE has_active_sub = true;
 
-3. Arat? detaliile pl??ilor f?cute �n ultimele 7 zile:
+3. Arată detaliile plăților făcute în ultimele 7 zile:
    SELECT * FROM payments WHERE payed_at >= NOW() - INTERVAL 7 DAY;
 
-4. Listeaz? toate rolurile al?turi de numele permisiunilor asociate:
+4. Listeaza toate rolurile alaturi de numele permisiunilor asociate:
    SELECT roles.title, permissions.action
    FROM roles
    JOIN permissions_for_roles ON roles.id = permissions_for_roles.role_id
    JOIN permissions ON permissions_for_roles.permission_id = permissions.id;
 
-5. Afi?eaz? to?i angaja?ii cu un salariu mai mare de 5000:
+5. Afiseaza toti angajatii cu un salariu mai mare de 5000:
    SELECT * FROM employee WHERE wage > 5000;
 
-6. G?se?te evenimentele jurnalelor care con?in cuv�ntul cheie "sala":
-   SELECT * FROM jurnal_events WHERE descr LIKE '%sala%';
+6. Gaseste evenimentele jurnalelor care contin cuvantul cheie "intrare":
+   SELECT * FROM jurnal_events WHERE descr LIKE '%intrare%';
 
-7. Arat? num?rul total de clien?i:
+7. Arata numarul total de clienti:
    SELECT COUNT(*) as total_clients FROM clients;
 
-8. Afi?eaz? detaliile abonamentului ?i data pl??ii pentru un anumit client:
+8. Afiseaza detaliile abonamentului si data platii pentru un anumit client:
    SELECT s.*, p.payed_at
    FROM subscriptions s
    JOIN payments p ON s.id = p.subscription_id
    WHERE p.client_id = 1;
 
-9. G?se?te cel mai recent eveniment jurnal pentru fiecare client:
+9. Gasete cel mai recent eveniment jurnal pentru fiecare client:
    SELECT c.id as client_id, c.firstname, c.lastname, je.descr as recent_event
    FROM clients c
    LEFT JOIN jurnal j ON c.id = j.client_id
@@ -38,44 +38,44 @@
    ORDER BY j.created_at DESC
    LIMIT 1;
 
-10. Calculeaz? salariul mediu al angaja?ilor:
+10. Calculeaza salariul mediu al angajatilor:
     SELECT AVG(wage) as average_salary FROM employee;
 
-11. Afi?eaz? abonamentele care nu au fost �nc? pl?tite:
+11. Afiseaza abonamentele care nu au fost inca platite:
     SELECT s.*
     FROM subscriptions s
     LEFT JOIN payments p ON s.id = p.subscription_id
     WHERE p.id IS NULL;
 
-12. Listeaz? clien?ii ?i detaliile abonamentului pentru cei cu abonamente active ?i pre? mai mic de 100:
+12. Listeaza clientii si detaliile abonamentului pentru cei cu abonamente active si pret mai mic de 100:
     SELECT c.*, s.*
     FROM clients c
     JOIN subscriptions s ON c.subscription_id = s.id
     WHERE c.has_active_sub = true AND s.price < 100;
 
-13. Afi?eaz? toate pl??ile ?i data viitoarei pl??i pentru clien?ii cu abonamente active:
+13. Afiaeaza toate platile si data viitoarei plati pentru clientii cu abonamente active:
     SELECT c.id, c.firstname, c.lastname, p.payed_at, c.next_payment_at
     FROM clients c
     JOIN payments p ON c.id = p.client_id
     WHERE c.has_active_sub = true;
 
-14. G?se?te cele mai scumpe abonamente disponibile:
+14. Gaseste cele mai scumpe abonamente disponibile:
     SELECT * FROM subscriptions ORDER BY price DESC LIMIT 1;
 
-15. Afi?eaz? toate evenimentele jurnalelor pentru un anumit client �n ordine cronologic? invers?:
+15. Afiseaza toate evenimentele jurnalelor pentru un anumit client în ordine cronologica inversa:
     SELECT je.descr, j.created_at
     FROM jurnal j
     JOIN jurnal_events je ON j.event_id = je.id
     WHERE j.client_id = 1
     ORDER BY j.created_at DESC;
 
-16. Calculeaz? num?rul total de angaja?i ?i num?rul de angaja?i pentru fiecare rol:
+16. Calculeaza numarul total de angajati si numarul de angajati pentru fiecare rol:
     SELECT r.title, COUNT(e.id) as num_employees
     FROM roles r
     LEFT JOIN employee e ON r.id = e.role_id
     GROUP BY r.title;
 
-17. Afi?eaz? detaliile angaja?ilor ?i rolelor lor, sortate dup? rating descresc?tor:
+17. Afiseaza detaliile angajatilor si rolurilor lor, sortate dupa rating descrescator:
     SELECT e.*, r.title
     FROM employee e
     JOIN roles r ON e.role_id = r.id
@@ -83,35 +83,35 @@
 
 18. 
 
-19. Afi?eaz? clien?ii cu abonamente active ?i data urm?toarei pl??i este �n viitor:
+19. Afieaza clientii cu abonamente active ai data urmatoarei plati:
     SELECT * FROM clients WHERE has_active_sub = true AND next_payment_at > NOW();
 
-20. G?se?te clien?ii care nu au pl?tit niciodat? pentru abonamentul lor:
+20. Gaseate clientii care nu au platit niciodata pentru abonamentul lor:
     SELECT c.*
     FROM clients c
     LEFT JOIN payments p ON c.id = p.client_id AND c.subscription_id = p.subscription_id
     WHERE p.id IS NULL;
 
-21. Calculeaz? suma total? a pl??ilor pentru fiecare abonament:
+21. Calculeaza suma totala a platilor pentru fiecare abonament:
     SELECT s.id, s.description, COALESCE(SUM(s.price), 0) as total_payments
 FROM subscriptions s
 LEFT JOIN payments p ON s.id = p.subscription_id
 GROUP BY s.id, s.description;
 -- Am folosit funcția COALESCE pentru a gestiona situațiile în care nu există plăți asociate cu un abonament (SUM(s.price) va fi NULL în astfel de cazuri, iar COALESCE îl setează la 0).
 
-22. Afi?eaz? clien?ii care nu au fost niciodat? �nregistra?i �n jurnal:
+22. Afiseaza clientii care nu au fost niciodata inregistrati in jurnal:
     SELECT c.*
     FROM clients c
     LEFT JOIN jurnal j ON c.id = j.client_id
     WHERE j.id IS NULL;
 
-23. Calculeaz? salariul total pl?tit angaja?ilor pentru fiecare rol:
+23. Calculeaza salariul total platit angajatilor pentru fiecare rol:
     SELECT r.title, SUM(e.wage) as total_wages
     FROM roles r
     JOIN employee e ON r.id = e.role_id
     GROUP BY r.title;
 
-24. Afi?eaz? angaja?ii cu cele mai mari salarii pentru fiecare rol:
+24. Afiseaza angajatii cu cele mai mari salarii pentru fiecare rol:
     SELECT e.*
     FROM employee e
     JOIN (
@@ -120,34 +120,34 @@ GROUP BY s.id, s.description;
         GROUP BY role_id
     ) max_wages ON e.role_id = max_wages.role_id AND e.wage = max_wages.max_wage;
 
-25. G?se?te clien?ii care au evenimente jurnale �nainte de data specificat?:
+25. Gaseste clientii care au evenimente jurnale inainte de data specificata:
     SELECT DISTINCT c.*
     FROM clients c
     JOIN jurnal j ON c.id = j.client_id
     WHERE j.created_at < '2024-01-01';
 
-26. Afi?eaz? rolurile care nu au nicio permisiune asociat?:
+26. Afiseaza rolurile care nu au nicio permisiune asociate:
     SELECT r.*
     FROM roles r
     LEFT JOIN permissions_for_roles pr ON r.id = pr.role_id
     WHERE pr.id IS NULL;
 
-27. Calculeaz? num?rul total de evenimente jurnale pentru fiecare client:
+27. Calculeaza numarul total de evenimente jurnale pentru fiecare client:
     SELECT c.id, c.firstname, c.lastname, COUNT(j.id) as num_journal_events
     FROM clients c
     LEFT JOIN jurnal j ON c.id = j.client_id
     GROUP BY c.id;
 
-28. Afi?eaz? angaja?ii care au fost angaja?i �nainte de o anumit? dat?:
+28. Afiseaza angajatii care au fost angajati inainte de o anumita data:
     SELECT * FROM employee WHERE employed_at < '2024-01-01';
 
-29. G?se?te clien?ii care au pl?tit cel pu?in o dat? ?i nu au abonamente active:
+29. Gaseste clientii care au platit cel putin o data si nu au abonamente active:
     SELECT c.*
     FROM clients c
     JOIN payments p ON c.id = p.client_id
     WHERE c.has_active_sub = false;
 
-30. Calculeaz? durata medie a angaj?rii pentru fiecare rol:
+30. Calculeaza durata medie a angajarii pentru fiecare rol:
     SELECT r.title, AVG(DATEDIFF(NOW(), e.employed_at)) as avg_employment_duration
     FROM roles r
     JOIN employee e ON r.id = e.role_id
