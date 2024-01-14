@@ -1,6 +1,5 @@
-/**
- * Add a new employee to the employee table.
- */
+DELIMITER //
+
 CREATE PROCEDURE AddEmployee(
     IN firstname_param VARCHAR(20),
     IN lastname_param VARCHAR(20),
@@ -14,4 +13,6 @@ CREATE PROCEDURE AddEmployee(
 BEGIN
     INSERT INTO employee (firstname, lastname, email, pass, wage, rating, employed_at, role_id)
     VALUES (firstname_param, lastname_param, email_param, pass_param, wage_param, rating_param, employed_at_param, role_id_param);
-END;
+END //
+
+DELIMITER ;

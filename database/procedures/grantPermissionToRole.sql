@@ -1,7 +1,4 @@
-/**
- * Grant a permission to a specific role.
- */
- 
+DELIMITER //
 CREATE PROCEDURE GrantPermissionToRole(
     IN p_role_id INT,
     IN p_permission_id INT
@@ -9,4 +6,5 @@ CREATE PROCEDURE GrantPermissionToRole(
 BEGIN
     INSERT INTO permissions_for_roles (role_id, permission_id)
     VALUES (p_role_id, p_permission_id);
-END
+END //
+DELIMITER ;

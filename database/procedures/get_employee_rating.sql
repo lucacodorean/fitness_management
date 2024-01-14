@@ -1,3 +1,4 @@
+DROP PROCEDURE IF EXISTS get_employee_rating;
 DELIMITER //
 CREATE PROCEDURE get_employee_rating(IN employee_id INT, OUT result FLOAT)
 BEGIN
@@ -9,3 +10,4 @@ BEGIN
     ELSE SET result = 0;
     END IF;
 END //
+DELIMITER ;
