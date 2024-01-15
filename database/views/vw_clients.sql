@@ -1,6 +1,6 @@
 USE fitness_management_database;
 
-CREATE OR REPLACE VIEW client AS
+CREATE OR REPLACE VIEW vw_client AS
 SELECT
     client.id,
     client.firstname,
