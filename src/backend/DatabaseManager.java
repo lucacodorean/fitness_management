@@ -30,8 +30,10 @@ public class DatabaseManager {
     public ResultSet selectPreparedSQL(String statement, List<String> parameters) throws SQLException {
         try {
             PreparedStatement command = this.connection.prepareStatement(statement);
-            for(int i = 0; i<parameters.size(); i++) {
-                command.setString(i+1, parameters.get(i));
+            if(parameters != null) {
+                for(int i = 0; i<parameters.size(); i++) {
+                    command.setString(i+1, parameters.get(i));
+                }
             }
             
             return command.executeQuery();
@@ -58,8 +60,10 @@ public class DatabaseManager {
     public ResultSet callableSQL(String statement, List<String> parameters) throws SQLException {
         try {
             CallableStatement command = this.connection.prepareCall(statement);
-            for(int i = 0; i<parameters.size(); i++) {
-                command.setString(i+1, parameters.get(i));
+            if(parameters != null) {
+                for(int i = 0; i<parameters.size(); i++) {
+                    command.setString(i+1, parameters.get(i));
+                }
             }
 
             return command.executeQuery();

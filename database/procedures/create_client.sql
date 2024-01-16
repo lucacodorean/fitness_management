@@ -14,8 +14,8 @@ BEGIN
     CALL has_employee_permission(13, employee_id, ok);
 
     IF ok THEN
-        INSERT INTO clients (firstName, lastName, email, subscription_id) 
-            VALUES (first_name, last_name, email_address, 4);
+        INSERT INTO clients (firstName, lastName, email, subscription_id, next_payment_at) 
+            VALUES (first_name, last_name, email_address, 4, CURRENT_TIMESTAMP + INTERVAL 1 MONTH);
     END IF;
 END //
 

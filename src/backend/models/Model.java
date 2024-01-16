@@ -18,7 +18,7 @@ public abstract class Model {
     this.tableName = value;
   }
 
-  private String getTable() {
+  public String getTable() {
     return tableName == null
       ? this.getClass().getSuperclass().getSimpleName().toLowerCase()
       : tableName;

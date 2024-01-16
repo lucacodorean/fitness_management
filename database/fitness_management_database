@@ -1,0 +1,392 @@
+-- -------------------------------------------------------------
+-- TablePlus 5.8.2(528)
+--
+-- https://tableplus.com/
+--
+-- Database: fitness_management_database
+-- Generation Time: 2024-01-15 17:12:27.1680
+-- -------------------------------------------------------------
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DROP TABLE IF EXISTS `clients`;
+CREATE TABLE `clients` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(20) NOT NULL,
+  `lastname` varchar(20) NOT NULL,
+  `email` varchar(25) NOT NULL,
+  `has_active_sub` tinyint(1) NOT NULL DEFAULT '0',
+  `subscription_id` int NOT NULL DEFAULT '4',
+  `next_payment_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `email` (`email`),
+  KEY `c1` (`subscription_id`),
+  CONSTRAINT `c1` FOREIGN KEY (`subscription_id`) REFERENCES `subscriptions` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `employees`;
+CREATE TABLE `employees` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(20) NOT NULL,
+  `lastname` varchar(20) NOT NULL,
+  `email` varchar(25) NOT NULL,
+  `pass` varchar(64) NOT NULL,
+  `wage` int NOT NULL,
+  `rating` float NOT NULL DEFAULT '0',
+  `employed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `role_id` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `c6` (`role_id`),
+  CONSTRAINT `c6` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `events`;
+CREATE TABLE `events` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `descr` varchar(256) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `feedback`;
+CREATE TABLE `feedback` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `client_id` int NOT NULL,
+  `employee_id` int NOT NULL,
+  `rating` float NOT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `fk_client_id_feedback` (`client_id`),
+  KEY `fk_employee_id_feedback` (`employee_id`),
+  CONSTRAINT `fk_client_id_feedback` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`),
+  CONSTRAINT `fk_employee_id_feedback` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `jurnals`;
+CREATE TABLE `jurnals` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `client_id` int NOT NULL,
+  `event_id` int NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `c7` (`client_id`),
+  KEY `c8` (`event_id`),
+  CONSTRAINT `c7` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`),
+  CONSTRAINT `c8` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `payments`;
+CREATE TABLE `payments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `client_id` int NOT NULL,
+  `subscription_id` int NOT NULL,
+  `payed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `c2` (`subscription_id`),
+  KEY `c3` (`client_id`),
+  CONSTRAINT `c2` FOREIGN KEY (`subscription_id`) REFERENCES `subscriptions` (`id`),
+  CONSTRAINT `c3` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `permission_role`;
+CREATE TABLE `permission_role` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `role_id` int NOT NULL,
+  `permission_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `c4` (`role_id`),
+  KEY `c5` (`permission_id`),
+  CONSTRAINT `c4` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
+  CONSTRAINT `c5` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `permissions`;
+CREATE TABLE `permissions` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `action` varchar(256) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE `roles` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `subscriptions`;
+CREATE TABLE `subscriptions` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `price` int NOT NULL,
+  `description` varchar(256) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `trainings`;
+CREATE TABLE `trainings` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `client_id` int NOT NULL,
+  `trainer_id` int NOT NULL,
+  `time_start` timestamp NOT NULL,
+  `time_end` timestamp NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `client_schedule` (`client_id`),
+  KEY `trainer_schedule` (`trainer_id`),
+  CONSTRAINT `client_schedule` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`),
+  CONSTRAINT `trainer_schedule` FOREIGN KEY (`trainer_id`) REFERENCES `employees` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP VIEW IF EXISTS `vw_active_clients`;
+
+
+DROP VIEW IF EXISTS `vw_client`;
+
+
+DROP VIEW IF EXISTS `vw_employee`;
+
+
+DROP VIEW IF EXISTS `vw_feedback`;
+
+
+DROP VIEW IF EXISTS `vw_subscriptions`;
+
+
+DROP VIEW IF EXISTS `vw_traings`;
+
+
+INSERT INTO `clients` (`id`, `firstname`, `lastname`, `email`, `has_active_sub`, `subscription_id`, `next_payment_at`) VALUES
+(1, 'Ana-Maria', 'Popescu', 'client@email.com', 1, 1, '2024-02-15 09:29:18'),
+(2, 'Ion', 'Preda', 'john.client3@email.com', 0, 4, '2023-11-29 13:30:00'),
+(15, 'Raluca', 'Gheorghiu', 'gherghita@gmail.com', 1, 3, '2023-12-04 17:30:00'),
+(16, 'Andrei', 'Popescu', 'andrei.popescu@gmail.com', 1, 2, '2023-10-03 14:30:00'),
+(17, 'Elena', 'Ionescu', 'elena.ionescu@gmail.com', 0, 4, '2023-10-10 10:15:10'),
+(18, 'Alex Maria', 'Vasile', 'alex.vasile@ayahoo.com', 1, 3, '2023-10-18 12:45:00'),
+(19, 'Ana Radu', 'Ciobanu', 'ana.radu@gmail.com', 1, 1, '2023-10-25 16:20:00'),
+(20, 'Andrei MIhai', 'Stoica', 'stoice32@gmail.com', 0, 2, '2023-11-01 09:00:00');
+
+INSERT INTO `employees` (`id`, `firstname`, `lastname`, `email`, `pass`, `wage`, `rating`, `employed_at`, `role_id`) VALUES
+(1, 'SuperAdmin', 'Dummy', 'super.admin@myfitness.com', 'parola', 4500, 5, '2023-12-15 09:21:52', 1),
+(2, 'New', 'Update', 'employee@email.com', 'password', 13000, 5, '2023-12-15 09:21:52', 1),
+(3, 'Casier', 'Dummy', 'cashier@myfitness.com', 'parola', 3000, 1, '2023-12-15 09:21:52', 3),
+(4, 'Antrenor', 'Dummy', 'trainer@myfitness.com', 'parola', 2500, 4.67, '2023-12-15 09:21:52', 4);
+
+INSERT INTO `events` (`id`, `descr`) VALUES
+(1, 'Client nou.'),
+(2, 'Client sters.'),
+(3, 'Angajat nou.'),
+(4, 'Angajat sters.'),
+(5, 'Clientul a intrat in sala.'),
+(6, 'Clientul a iesit din sala.'),
+(7, 'Clientul a efectuat o plata pentru un abonament.'),
+(8, 'Clientul si-a incetat abonamentul.'),
+(11, 'This is a test jurnal event');
+
+INSERT INTO `feedback` (`id`, `client_id`, `employee_id`, `rating`, `description`) VALUES
+(12, 1, 1, 1, 'This is an updated feedback'),
+(13, 1, 3, 1, 'This is a test feedback'),
+(14, 1, 3, 1, 'This is a test feedback'),
+(15, 1, 3, 1, 'This is a test feedback'),
+(16, 1, 3, 1, 'This is a test feedback'),
+(17, 1, 3, 1, 'This is a test feedback'),
+(18, 1, 3, 1, 'This is a test feedback'),
+(19, 1, 3, 1, 'This is a test feedback'),
+(20, 1, 2, 5, 'Other feedback');
+
+INSERT INTO `jurnals` (`id`, `client_id`, `event_id`, `created_at`) VALUES
+(19, 1, 1, '2024-01-15 09:10:57'),
+(20, 1, 7, '2024-01-15 09:10:57'),
+(21, 1, 7, '2024-01-15 09:29:18');
+
+INSERT INTO `payments` (`id`, `client_id`, `subscription_id`, `payed_at`) VALUES
+(14, 1, 1, '2024-01-15 09:10:57'),
+(15, 1, 1, '2024-01-15 09:29:18');
+
+INSERT INTO `permission_role` (`id`, `role_id`, `permission_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 4),
+(5, 1, 5),
+(6, 1, 6),
+(7, 1, 7),
+(8, 1, 8),
+(9, 1, 9),
+(10, 1, 10),
+(11, 1, 11),
+(12, 1, 12),
+(13, 1, 13),
+(14, 1, 14),
+(15, 1, 15),
+(16, 1, 16),
+(17, 1, 17),
+(18, 1, 18),
+(19, 1, 19),
+(20, 1, 20),
+(21, 2, 9),
+(22, 2, 10),
+(23, 2, 11),
+(24, 2, 12),
+(25, 2, 13),
+(26, 2, 14),
+(27, 2, 15),
+(28, 2, 16),
+(29, 2, 17),
+(30, 2, 18),
+(31, 2, 19),
+(32, 2, 20),
+(33, 3, 12),
+(34, 3, 13),
+(35, 3, 14),
+(36, 3, 15),
+(37, 3, 16),
+(38, 3, 17),
+(39, 3, 18),
+(40, 3, 19),
+(41, 3, 20),
+(42, 4, 14),
+(43, 4, 18);
+
+INSERT INTO `permissions` (`id`, `action`) VALUES
+(1, 'create_role'),
+(2, 'read_role'),
+(3, 'update_role'),
+(4, 'delete_role'),
+(5, 'create_permission'),
+(6, 'read_permission'),
+(7, 'update_permission'),
+(8, 'delete_permission'),
+(9, 'create_employee'),
+(10, 'read_employee'),
+(11, 'update_employee'),
+(12, 'delete_employee'),
+(13, 'create_client'),
+(14, 'read_client'),
+(15, 'update_client'),
+(16, 'delete_client'),
+(17, 'create_subscription'),
+(18, 'read_subcription'),
+(19, 'update_subscription'),
+(20, 'delete_subscription'),
+(21, 'create_payment'),
+(22, 'edit_payment'),
+(23, 'delete_payment');
+
+INSERT INTO `roles` (`id`, `title`) VALUES
+(1, 'Super-Administrator'),
+(2, 'Administrator'),
+(3, 'Casier'),
+(4, 'Antrenor');
+
+INSERT INTO `subscriptions` (`id`, `price`, `description`) VALUES
+(1, 150, 'Abonament basic lunar. Acces general in sala.'),
+(2, 175, 'Abonament permium lunar. Acces general in sala si la sauna.'),
+(3, 240, 'Abonament all inclusive lunar. Acces la toate facilitatile salii, plus snack la inceputul antrenamentului.'),
+(4, 0, 'Acesta este un abonament placeholder.');
+
+INSERT INTO `trainings` (`id`, `client_id`, `trainer_id`, `time_start`, `time_end`) VALUES
+(2, 1, 3, '2024-05-05 11:00:00', '2024-05-05 12:00:00'),
+(3, 1, 1, '2024-05-05 12:00:00', '2024-05-05 13:00:00');
+
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_active_clients` AS select concat(`clients`.`firstname`,' ',`clients`.`lastname`) AS `Client's name`,`clients`.`email` AS `Client's contact`,`clients`.`next_payment_at` AS `Next billing date`,`subscriptions`.`description` AS `Subscription information` from (`clients` left join `subscriptions` on((`clients`.`subscription_id` = `subscriptions`.`id`))) where (`clients`.`has_active_sub` = 1);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_client` AS select `client`.`id` AS `id`,`client`.`firstname` AS `firstname`,`client`.`lastname` AS `lastname`,`client`.`email` AS `email`,`latest_jurnal`.`descr` AS `last_event`,`subscription`.`description` AS `subscription_description`,`client`.`next_payment_at` AS `next_payment_at`,`latest_feedback`.`description` AS `last_feedback` from (((`clients` `client` left join (select `events`.`id` AS `id`,`events`.`descr` AS `descr`,`max_event`.`client_id` AS `client_id` from (`events` join (select `jurnals`.`event_id` AS `event_id`,`jurnals`.`client_id` AS `client_id` from (`jurnals` join (select `jurnals`.`client_id` AS `client_id`,max(`jurnals`.`id`) AS `max_jurnal_id` from `jurnals` group by `jurnals`.`client_id`) `max_jurnal` on((`jurnals`.`id` = `max_jurnal`.`max_jurnal_id`)))) `max_event` on((`events`.`id` = `max_event`.`event_id`)))) `latest_jurnal` on((`client`.`id` = `latest_jurnal`.`client_id`))) left join `subscriptions` `subscription` on((`client`.`subscription_id` = `subscription`.`id`))) left join (select `feedback`.`id` AS `id`,`feedback`.`client_id` AS `client_id`,`feedback`.`employee_id` AS `employee_id`,`feedback`.`rating` AS `rating`,`feedback`.`description` AS `description` from (`feedback` join (select `feedback`.`client_id` AS `client_id`,max(`feedback`.`id`) AS `max_feedback_id` from `feedback` group by `feedback`.`client_id`) `max_feedback` on((`feedback`.`id` = `max_feedback`.`max_feedback_id`)))) `latest_feedback` on((`client`.`id` = `latest_feedback`.`client_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_employee` AS select `emp`.`firstname` AS `firstname`,`emp`.`lastname` AS `lastname`,`emp`.`email` AS `email`,`emp`.`wage` AS `wage`,`emp`.`rating` AS `rating`,`latest_feedback`.`description` AS `lastest_feedback`,`next_training`.`time_start` AS `next_training_at`,`client`.`firstname` AS `next_training_client_firstname`,`emp`.`employed_at` AS `employed_at` from (((`employees` `emp` left join (select `trainings`.`time_start` AS `time_start`,`trainings`.`client_id` AS `client_id`,`correct_training`.`trainer_id` AS `trainer_id` from (`trainings` join (select `trainings`.`trainer_id` AS `trainer_id`,min(`trainings`.`time_start`) AS `next_training_at` from `trainings` where (`trainings`.`time_start` > now()) group by `trainings`.`trainer_id`) `correct_training` on((`trainings`.`time_start` = `correct_training`.`next_training_at`)))) `next_training` on((`emp`.`id` = `next_training`.`trainer_id`))) left join `clients` `client` on((`client`.`id` = `next_training`.`client_id`))) left join (select `feedback`.`id` AS `id`,`feedback`.`client_id` AS `client_id`,`feedback`.`employee_id` AS `employee_id`,`feedback`.`rating` AS `rating`,`feedback`.`description` AS `description` from (`feedback` join (select `feedback`.`employee_id` AS `employee_id`,max(`feedback`.`id`) AS `max_feedback_id` from `feedback` group by `feedback`.`employee_id`) `max_feedback` on((`feedback`.`id` = `max_feedback`.`max_feedback_id`)))) `latest_feedback` on((`emp`.`id` = `latest_feedback`.`employee_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_feedback` AS select concat(`client`.`firstname`,' ',`client`.`lastname`) AS `client_name`,concat(`emp`.`firstname`,' ',`emp`.`lastname`) AS `employee_name`,`client`.`avg_rating` AS `average_given_rating`,`feedback`.`rating` AS `rating`,`feedback`.`description` AS `description` from ((`feedback` left join `employees` `emp` on((`feedback`.`employee_id` = `emp`.`id`))) left join (select `clients`.`id` AS `id`,`clients`.`firstname` AS `firstname`,`clients`.`lastname` AS `lastname`,`clients`.`email` AS `email`,`clients`.`has_active_sub` AS `has_active_sub`,`clients`.`subscription_id` AS `subscription_id`,`clients`.`next_payment_at` AS `next_payment_at`,avg(`feedback`.`rating`) AS `avg_rating` from (`clients` left join `feedback` on((`clients`.`id` = `feedback`.`client_id`))) group by `clients`.`id`,`clients`.`firstname`,`clients`.`lastname`) `client` on((`feedback`.`client_id` = `client`.`id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_subscriptions` AS select coalesce(`client`.`activeCount`,0) AS `active_count`,coalesce(`client`.`totalCount`,0) AS `total_count`,`sub`.`price` AS `price`,`sub`.`description` AS `description` from (`subscriptions` `sub` left join (select count((case when (`client`.`has_active_sub` = 1) then 1 end)) AS `activeCount`,count(`client`.`id`) AS `totalCount`,`client`.`subscription_id` AS `subscription_id` from `clients` `client` group by `client`.`subscription_id`) `client` on((`sub`.`id` = `client`.`subscription_id`))) order by coalesce(`client`.`activeCount`,0) desc;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_traings` AS select concat(`client`.`firstname`,' ',`client`.`lastname`) AS `client`,concat(`emp`.`firstname`,' ',`emp`.`lastname`) AS `trainer`,`training`.`time_start` AS `time_start`,`training`.`time_end` AS `time_end` from ((`trainings` `training` left join `clients` `client` on((`client`.`id` = `training`.`client_id`))) left join `employees` `emp` on((`emp`.`id` = `training`.`client_id`)));
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

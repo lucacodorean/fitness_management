@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="810.0" style="-fx-background-color: bc3020;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.JurnalController">
+   <top>
+      <BorderPane prefHeight="93.0" prefWidth="810.0" BorderPane.alignment="CENTER">
+         <left>
+            <Label alignment="CENTER" prefHeight="79.0" prefWidth="207.0" text="Jurnal de evenimente" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+         </left>
+         <right>
+            <Button fx:id="btnHomepage" mnemonicParsing="false" onAction="#redirectToHomepage" prefHeight="139.0" prefWidth="173.0" style="-fx-background-color: transparent;" text="Return to homepage" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </right>
+      </BorderPane>
+   </top>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <bottom>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <right>
+                  <Button fx:id="bcAddEvent" mnemonicParsing="false" onAction="#addEvent" prefHeight="111.0" prefWidth="130.0" style="-fx-background-color: transparent;" text="Adaugă eveniment" textFill="WHITE" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </right>
+               <left>
+                  <Label prefHeight="17.0" prefWidth="168.0" text="Textul evenimentului" textFill="WHITE" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </left>
+               <center>
+                  <TextField fx:id="txtText" promptText="txtText" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+         </bottom>
+         <top>
+            <TableView fx:id="tbJurnal" prefHeight="274.0" prefWidth="810.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="tcClient" prefWidth="162.0" text="Client information" />
+                <TableColumn fx:id="tcEvent" prefWidth="348.0" text="Event information" />
+                  <TableColumn fx:id="tcTime" prefWidth="187.0" text="Time" />
+              </columns>
+            </TableView>
+         </top>
+      </BorderPane>
+   </center>
+</BorderPane>

@@ -1,8 +1,5 @@
 package backend.controllers;
 
-import backend.routes.Router;
-import frontend.Window;
-
 public class AboutController implements IController {
 
   public static void index() {

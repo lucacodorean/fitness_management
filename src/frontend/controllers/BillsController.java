@@ -3,13 +3,10 @@ package frontend.controllers;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import backend.DatabaseManager;
 import backend.models.Bill;
-import backend.models.Client;
-import backend.models.Subscription;
 import frontend.Window;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,8 +36,7 @@ public class BillsController implements Initializable {
     private static ObservableList<Bill> getBills() {
         ObservableList<Bill> list = FXCollections.observableArrayList();
         try {
-            ArrayList<String> parameters = new ArrayList<>();
-            ResultSet resultSetPayments = new DatabaseManager().selectPreparedSQL("select id from payments", parameters);
+            ResultSet resultSetPayments = new DatabaseManager().callableSQL("call fetch_payments();", null);
             while(resultSetPayments.next()) {
                 list.add(Bill.getDetails(resultSetPayments.getInt(1)));
             }

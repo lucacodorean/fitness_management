@@ -25,7 +25,7 @@ public class Schedule extends Model {
     public LocalDateTime getTimeStart() { return this.timeStart; }
 
     public Schedule () {
-        this.settableName("schedule");
+        this.settableName("trainings");
     }
 
     public Schedule(Integer id, Client client, Employee trainer, LocalDateTime timeStart, LocalDateTime timeEnd) {
@@ -35,7 +35,7 @@ public class Schedule extends Model {
         this.setTimeStart(timeStart);
         this.setTimeEnd(timeEnd);
 
-        this.settableName("schedule");
+        this.settableName("trainings");
     }
 
     @Override

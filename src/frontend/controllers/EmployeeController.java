@@ -23,8 +23,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.util.converter.IntegerStringConverter;
 
 public class EmployeeController implements Initializable{
 
@@ -42,6 +40,8 @@ public class EmployeeController implements Initializable{
 
     public void redirectHomepage()       { Window.getInstance().setView("homepage"); }
     public void redirectCreateEmployee() { Window.getInstance().setView("create_employee"); }
+    public void redirectEvents()         { Window.getInstance().setView("jurnal_view");}
+
     public void deleteEmployee() {
         try {
             new Employee().delete(tbEmployees.getSelectionModel().getSelectedItem().getId());
@@ -70,7 +70,7 @@ public class EmployeeController implements Initializable{
                     JOptionPane.showMessageDialog(
                         frame,
                         "Eroare la stergerea angajatului.",
-                        "SUCCES",
+                        "ERROR",
                         JOptionPane.INFORMATION_MESSAGE
                     );
                 }
@@ -128,7 +128,7 @@ public class EmployeeController implements Initializable{
                     JOptionPane.showMessageDialog(
                         frame,
                         "Eroare la actualizarea angajatului.",
-                        "SUCCES",
+                        "EROARE",
                         JOptionPane.INFORMATION_MESSAGE
                     );
                 }

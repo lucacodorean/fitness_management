@@ -23,7 +23,7 @@ public class AuthController implements IController {
     }
 
     StateManager.getInstance().setAuth(employee);
-    Router.getInstance().go("home");
+    Window.getInstance().setView("homepage");
   }
 
   public static void logout() {

@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import backend.DatabaseManager;
 import backend.StateManager;
+import backend.models.Employee;
 import backend.models.Schedule;
 import frontend.Window;
 import javafx.collections.FXCollections;
@@ -77,7 +78,7 @@ public class TrainingsController implements Initializable {
         parameters.add(StateManager.getInstance().getAuth().getEmail());
 
         try {
-            ResultSet resultId = dbManager.selectPreparedSQL("select id from employee where email = ?", parameters);
+            ResultSet resultId = dbManager.selectPreparedSQL("select id from " + new Employee().getTable() + " where email = ?", parameters);
             resultId.next();
             id = resultId.getInt(1);
 
@@ -85,16 +86,19 @@ public class TrainingsController implements Initializable {
             parameters.add(id.toString());    
             
             ResultSet result = dbManager.selectPreparedSQL(
-                "select * from VIEW_TRAINER_SCHEDULE where trainer_id = ?", 
+                "select * from vw_traings where trainer_id = ?", 
                 parameters
             );
+            //result.next();
 
-            result.next();
-
+            int i = 0;
             while(result.next()) {
                 BorderPane scheduleFrame = getFrame(result.getString(2), result.getString(1), result.getString(3), result.getString(4));
                 vbTrainingsList.getChildren().add(scheduleFrame);
+                i++;
             }
+
+            System.out.println(i);
 
         } catch (Exception ex) {
             System.err.println(ex.toString());

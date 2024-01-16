@@ -86,7 +86,7 @@ public class Client extends Model {
                 parameters.add(java.time.LocalDateTime.now().toString());
     
                 try{ 
-                    database.updatePreparedSQL("insert into jurnal (client_id, event_id, created_at) values (?,?,?)", parameters);
+                    database.updatePreparedSQL("insert into jurnals (client_id, event_id, created_at) values (?,?,?)", parameters);
                     JFrame frame = new JFrame("Notification Box");
                     SwingUtilities.invokeLater(new Runnable() {
                         public void run() {
@@ -126,7 +126,7 @@ public class Client extends Model {
                 parameters.add(java.time.LocalDateTime.now().toString());
     
                 try{ 
-                    database.updatePreparedSQL("insert into jurnal (client_id, event_id, created_at) values (?,?,?)", parameters);
+                    database.updatePreparedSQL("insert into jurnals (client_id, event_id, created_at) values (?,?,?)", parameters);
                     JFrame frame = new JFrame("Notification Box");
                     SwingUtilities.invokeLater(new Runnable() {
                         public void run() {

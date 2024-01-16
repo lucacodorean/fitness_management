@@ -7,6 +7,7 @@ import backend.DatabaseManager;
 import backend.StateManager;
 import backend.contracts.IRequest;
 import backend.models.Employee;
+import frontend.Window;
 
 public class LoginRequest implements IRequest {
 
@@ -21,11 +22,12 @@ public class LoginRequest implements IRequest {
       ArrayList<String> parameters = new ArrayList<>();
       parameters.add(emailString);
       parameters.add(passwordString);
-      ResultSet rs = new DatabaseManager().selectPreparedSQL("select * from employee where email = ? and pass = ?", parameters);
+      ResultSet rs = new DatabaseManager().selectPreparedSQL("select * from " + new Employee().getTable() +  " where email = ? and pass = ?", parameters);
       rs.next();
       
       StateManager.getInstance().setAuth(Employee.getDetails(rs.getInt("id")));
-      System.out.println(StateManager.getInstance().getAuth());
+      Window.getInstance().setView("homepage");
+
     } catch (Exception ex) {
       System.out.println("Eroare la conectare.\n" + ex.toString());
     }

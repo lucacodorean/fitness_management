@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 
 import backend.ClientSingleton;
 import backend.DatabaseManager;
-import backend.models.Client;
 import backend.models.Subscription;
 import frontend.Window;
 import javafx.collections.FXCollections;
@@ -51,11 +50,10 @@ public class RenewSubscriptionController implements Initializable {
             ArrayList<String>parameters = new ArrayList<String>();
             parameters.add(ClientSingleton.getCurrentInstance().getClient().getId().toString());
             parameters.add("7");
-            parameters.add(java.time.LocalDateTime.now().toString());
 
             DatabaseManager databaseManager = new DatabaseManager();
-            databaseManager.updatePreparedSQL(
-                "insert into jurnal (client_id, event_id, created_at) values (?,?,?)", parameters
+            databaseManager.callableSQL(
+                "call create_junal(?,?)", parameters
             );
 
             JOptionPane.showMessageDialog(null,"Plata a fost inregistrata cu succes.", "SUCCES", JOptionPane.INFORMATION_MESSAGE);

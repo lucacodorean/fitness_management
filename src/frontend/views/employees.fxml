@@ -105,6 +105,11 @@
                   </Button>
                </children>
             </VBox>
+            <Button fx:id="btnEvents" mnemonicParsing="false" onAction="#redirectEvents" prefHeight="76.0" prefWidth="168.0" style="-fx-background-color: transparent;" text="Jurnal de evenimente" textFill="WHITE" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
          </children>
       </GridPane>
    </center>

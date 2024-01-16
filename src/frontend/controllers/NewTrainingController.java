@@ -57,7 +57,7 @@ public class NewTrainingController implements Initializable{
             
             ResultSet rs = databaseManager
                 .selectPreparedSQL(
-                    "select * from clients where firstname = ? and lastname = ?", 
+                    "select * from " + new Client().getTable() + " where firstname = ? and lastname = ?", 
                     parametersClient
             );
 
@@ -66,7 +66,7 @@ public class NewTrainingController implements Initializable{
             
             rs = databaseManager
                 .selectPreparedSQL(
-                    "select * from employee where firstname = ? and lastname = ?", 
+                    "select * from " + new Employee().getTable() + " where firstname = ? and lastname = ?", 
                     parametersTrainer
             );
 
@@ -75,8 +75,8 @@ public class NewTrainingController implements Initializable{
             parameters.add(dpStartingDate.getValue().toString() + "T" + txtStartSchedule.getText());
             parameters.add(dpEndingDate.getValue().toString()   + "T" + txtEndSchedule.getText());
 
-            databaseManager.updatePreparedSQL(
-                "insert into schedule (client_id, trainer_id, time_start, time_end) values (?,?,?,?)", 
+            databaseManager.callableSQL(
+                "call create_training(?, ?, ?, ?)", 
                 parameters
             );
 

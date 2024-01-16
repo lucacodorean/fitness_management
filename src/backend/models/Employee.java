@@ -23,12 +23,13 @@ public class Employee extends Model {
   private LocalDateTime employementDate;
 
   public Employee() {
-    this.settableName("employee");
+    this.settableName("employees");
   }
 
   public Employee(String email, String password) throws Exception {
     if (!Employee.login(email, password)) {
       System.err.println("Invalid email or password.");
+      this.settableName("employees");
       throw new Exception("Invalid email or password");
     }
 
@@ -38,7 +39,7 @@ public class Employee extends Model {
     ArrayList<String> parameters = new ArrayList<String>();
     parameters.add(email);
 
-    ResultSet temp = database.selectPreparedSQL("select id from employee where email = ?", parameters);
+    ResultSet temp = database.selectPreparedSQL("select id from " + new Employee().getTable() + " where email = ?", parameters);
 
     if (temp.next()) {
       Employee tempEmployee = Employee.getDetails(temp.getInt(1));
@@ -67,7 +68,7 @@ public class Employee extends Model {
     this.setWage(wage);
     this.setRole(role);
     this.setEmployement(employementDate);
-    this.settableName("employee");
+    this.settableName("employees");
   }
 
   public void setWage(Integer wage) {
@@ -187,7 +188,7 @@ public class Employee extends Model {
     parameters.add(id.toString());
 
     DatabaseManager databaseManager = new DatabaseManager();
-    ResultSet temp = databaseManager.selectPreparedSQL("select * from feedback where employee_id = ?", parameters);
+    ResultSet temp = databaseManager.selectPreparedSQL("select * from " + new Feedback().getTable() + " where employee_id = ?", parameters);
     temp.next();
 
     while (temp.next()) {
@@ -203,7 +204,7 @@ public class Employee extends Model {
     parameters.add(id.toString());
 
     DatabaseManager databaseManager = new DatabaseManager();
-    ResultSet temp = databaseManager.selectPreparedSQL("select * from schedule where trainer_id = ?", parameters);
+    ResultSet temp = databaseManager.selectPreparedSQL("select * from " + new Schedule().getTable() + " where trainer_id = ?", parameters);
     temp.next();
 
     while (temp.next()) {

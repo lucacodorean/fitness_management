@@ -56,7 +56,7 @@ public class App {
 
       Router router = new Router(routes);
       //router.go("login.view", new LoginViewRequest(false));
-      router.go("login", new LoginRequest("maria@gymtehnica.com", "keb91dni"));
+      router.go("login.view", new LoginRequest("super.admin@myfitness.com", "parola"));
     });
   }
 }

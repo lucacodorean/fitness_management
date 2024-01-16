@@ -1,7 +1,6 @@
 package backend.controllers;
 
 import backend.StateManager;
-import backend.models.Client;
 import backend.routes.Router;
 import frontend.Window;
 
