@@ -27,6 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class EmployeeController implements Initializable{
 
     @FXML private Button btnHomepage;
+    @FXML private Button btnFeedback;
     @FXML private TableView<Employee> tbEmployees;
     @FXML private TableColumn<Employee, String> tcFirstName;
     @FXML private TableColumn<Employee, String> tcLastName;
@@ -41,6 +42,7 @@ public class EmployeeController implements Initializable{
     public void redirectHomepage()       { Window.getInstance().setView("homepage"); }
     public void redirectCreateEmployee() { Window.getInstance().setView("create_employee"); }
     public void redirectEvents()         { Window.getInstance().setView("jurnal_view");}
+    public void redirectFeedback()       { Window.getInstance().setView("feedback_form");}
 
     public void deleteEmployee() {
         try {

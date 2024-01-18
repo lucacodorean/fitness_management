@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 
 import backend.ClientSingleton;
-import backend.DatabaseManager;
 import backend.models.Subscription;
 import frontend.Window;
 import javafx.collections.FXCollections;

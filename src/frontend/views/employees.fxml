@@ -23,6 +23,17 @@
                </font>
             </Button>
          </right>
+         <center>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <right>
+                  <Button fx:id="btnFeedback" alignment="CENTER" mnemonicParsing="false" onAction="#redirectFeedback" prefHeight="76.0" prefWidth="138.0" style="-fx-background-color: transparent;" text="Feedback App" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </right>
+            </BorderPane>
+         </center>
       </BorderPane>
    </top>
    <center>
