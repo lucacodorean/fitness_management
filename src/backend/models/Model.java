@@ -100,9 +100,9 @@ public abstract class Model {
     }
 
     columnsParameters.deleteCharAt(columnsParameters.lastIndexOf(","));
-
+  
     return database.updatePreparedSQL(
-      "update " + getTable() + " set " + columnsParameters + WHERE_ID,
+      "update " + this.getTable() + " set " + columnsParameters + WHERE_ID,
       parameters
     );
   }

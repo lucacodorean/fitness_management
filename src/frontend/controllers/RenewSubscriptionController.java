@@ -47,15 +47,6 @@ public class RenewSubscriptionController implements Initializable {
                 values
             );
 
-            ArrayList<String>parameters = new ArrayList<String>();
-            parameters.add(ClientSingleton.getCurrentInstance().getClient().getId().toString());
-            parameters.add("7");
-
-            DatabaseManager databaseManager = new DatabaseManager();
-            databaseManager.callableSQL(
-                "call create_junal(?,?)", parameters
-            );
-
             JOptionPane.showMessageDialog(null,"Plata a fost inregistrata cu succes.", "SUCCES", JOptionPane.INFORMATION_MESSAGE);
 
         } catch(Exception ex) {
